@@ -4,23 +4,28 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.IBinder;
 import android.widget.RemoteViews;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.keepalive.daemon.core.Constants;
-import com.keepalive.daemon.core.KeepAliveService;
+import com.keepalive.daemon.core.component.DaemonBaseService;
 import com.keepalive.daemon.core.component.DaemonService;
+import com.keepalive.daemon.core.component.MainProcessReceiver;
 import com.keepalive.daemon.core.utils.Logger;
 import com.keepalive.daemon.core.utils.NotificationUtil;
 import com.keepalive.daemon.core.utils.ServiceHolder;
 
-public class NotifyResidentService extends KeepAliveService {
+public class NotifyResidentService extends DaemonBaseService {
 
     @Override
     public final void onCreate() {
-        doStart();
         super.onCreate();
+        sendBroadcast(new Intent(this, MainProcessReceiver.class));
+        doStart();
+//        stopSelf();
     }
 
     @Override
@@ -47,6 +52,12 @@ public class NotifyResidentService extends KeepAliveService {
 
         ServiceHolder.getInstance().bindService(this, DaemonService.class, null);
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     @Override

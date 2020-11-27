@@ -25,22 +25,22 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        try {
-            Intent intent = new Intent(this, MyService.class);
-//            intent.putExtra(Constants.NOTI_SMALL_ICON_ID, R.drawable.notify_panel_notification_icon_bg);
-            intent.putExtra(Constants.NOTI_TITLE, getApplicationInfo().loadLabel(getPackageManager()));
-            intent.putExtra(Constants.NOTI_TEXT, "Hello, world!");
-            intent.putExtra(Constants.NOTI_IMPORTANCE, NotificationManager.IMPORTANCE_NONE);
-
-            Intent i = new Intent(this, MainActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pi = PendingIntent.getActivity(this, 0, i,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-            intent.putExtra(Constants.NOTI_PENDING_INTENT, pi);
-
-            ContextCompat.startForegroundService(this, intent);
-        } catch (Throwable th) {
-            Logger.e(Logger.TAG, "failed to start foreground service: " + th.getMessage());
-        }
+//        try {
+//            Intent intent = new Intent(this, MyService.class);
+////            intent.putExtra(Constants.NOTI_SMALL_ICON_ID, R.drawable.notify_panel_notification_icon_bg);
+//            intent.putExtra(Constants.NOTI_TITLE, getApplicationInfo().loadLabel(getPackageManager()));
+//            intent.putExtra(Constants.NOTI_TEXT, "Hello, world!");
+//            intent.putExtra(Constants.NOTI_IMPORTANCE, NotificationManager.IMPORTANCE_NONE);
+//
+//            Intent i = new Intent(this, MainActivity.class);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            PendingIntent pi = PendingIntent.getActivity(this, 0, i,
+//                    PendingIntent.FLAG_UPDATE_CURRENT);
+//            intent.putExtra(Constants.NOTI_PENDING_INTENT, pi);
+//
+//            ContextCompat.startForegroundService(this, intent);
+//        } catch (Throwable th) {
+//            Logger.e(Logger.TAG, "failed to start foreground service: " + th.getMessage());
+//        }
     }
 }

@@ -148,7 +148,7 @@ public class DaemonMain {
         entity.intent.writeToParcel(p, 0);
         p.writeString(null);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            p.writeInt(1); // 0 : WTF!!!
+            p.writeInt(0); // 0 : WTF!!!
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             p.writeString(entity.intent.getComponent().getPackageName());

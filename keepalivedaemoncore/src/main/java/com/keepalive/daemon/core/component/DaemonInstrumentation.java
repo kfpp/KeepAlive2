@@ -8,6 +8,7 @@ import com.keepalive.daemon.core.utils.Logger;
 import com.keepalive.daemon.core.utils.ServiceHolder;
 
 public class DaemonInstrumentation extends Instrumentation {
+
     @Override
     public void callApplicationOnCreate(Application application) {
         super.callApplicationOnCreate(application);

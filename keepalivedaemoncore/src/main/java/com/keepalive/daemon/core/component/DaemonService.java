@@ -1,5 +1,6 @@
 package com.keepalive.daemon.core.component;
 
+import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -8,15 +9,16 @@ import androidx.core.content.ContextCompat;
 import com.keepalive.daemon.core.notification.NotifyResidentService;
 import com.keepalive.daemon.core.utils.Logger;
 
-public class DaemonService extends DaemonBaseService {
+public class DaemonService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return super.onBind(intent);
+        return null;
     }
 
     @Override
     public void onCreate() {
+        super.onCreate();
         try {
             ContextCompat.startForegroundService(this,
                     new Intent().setClassName(getPackageName(), NotifyResidentService.class.getName()));
@@ -25,6 +27,5 @@ public class DaemonService extends DaemonBaseService {
         }
         startService(new Intent().setClassName(getPackageName(), AssistService1.class.getName()));
         startService(new Intent().setClassName(getPackageName(), AssistService2.class.getName()));
-        super.onCreate();
     }
 }

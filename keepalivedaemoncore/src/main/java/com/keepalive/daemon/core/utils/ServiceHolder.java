@@ -95,34 +95,28 @@ public class ServiceHolder {
         }
     }
 
-    public static void fireService(Context context, Class<? extends Service> clazz,
-                                   boolean isForeground) {
-        Logger.i(TAG, "call fireService(): service=" + clazz.getName()
-                + ", isForeground=" + isForeground);
+    public static void fireService(Context context, Class<? extends Service> clazz, boolean isForeground) {
+        Logger.i(TAG, "call fireService(): service=" + clazz.getName() + ", isForeground=" + isForeground);
+        Intent intent = new Intent(context, clazz);
         try {
-            Intent intent = new Intent(context, clazz);
             if (isForeground) {
 //                intent.setAction(context.getPackageName() + ".resident.START_FOREGROUND_SERVICE");
                 ContextCompat.startForegroundService(context, intent);
             } else {
-                try {
-                    context.startService(intent);
-                } catch (Throwable t) {
-                    Logger.e(TAG, "Failed to start service " + clazz.getCanonicalName(), t);
-                    context.bindService(intent, new ServiceConnection() {
-                        @Override
-                        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                            Logger.d(TAG, "ComponentName: " + componentName + ", IBinder: " + iBinder);
-                        }
-
-                        @Override
-                        public void onServiceDisconnected(ComponentName componentName) {
-                        }
-                    }, 0);
-                }
+                context.startService(intent);
             }
         } catch (Throwable t) {
-            t.printStackTrace();
+            Logger.e(TAG, "Failed to start service " + clazz.getCanonicalName(), t);
+            context.bindService(intent, new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                    Logger.d(TAG, "ComponentName: " + componentName + ", IBinder: " + iBinder);
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName componentName) {
+                }
+            }, 0);
         }
     }
 

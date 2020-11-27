@@ -97,18 +97,18 @@ public class DaemonHolder {
                 new Intent(base, DaemonInstrumentation.class)
         );
 
-        KeepAliveConfigs configs = new KeepAliveConfigs(
-                new KeepAliveConfigs.Config(base.getPackageName() + ":resident",
-                        NotifyResidentService.class.getCanonicalName()));
-//        configs.ignoreBatteryOptimization();
-//        configs.rebootThreshold(10 * 1000, 3);
-        configs.setOnBootReceivedListener(new KeepAliveConfigs.OnBootReceivedListener() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Logger.d(Logger.TAG, "############################# onReceive(): intent=" + intent);
-                ServiceHolder.fireService(context, DaemonService.class, false);
-            }
-        });
-        KeepAlive.init(base, configs);
+//        KeepAliveConfigs configs = new KeepAliveConfigs(
+//                new KeepAliveConfigs.Config(base.getPackageName() + ":resident",
+//                        NotifyResidentService.class.getCanonicalName()));
+////        configs.ignoreBatteryOptimization();
+////        configs.rebootThreshold(10 * 1000, 3);
+//        configs.setOnBootReceivedListener(new KeepAliveConfigs.OnBootReceivedListener() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                Logger.d(Logger.TAG, "############################# onReceive(): intent=" + intent);
+//                ServiceHolder.fireService(context, DaemonService.class, false);
+//            }
+//        });
+//        KeepAlive.init(base, configs);
     }
 }

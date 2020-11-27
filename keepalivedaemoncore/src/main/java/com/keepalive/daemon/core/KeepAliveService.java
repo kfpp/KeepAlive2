@@ -7,10 +7,10 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import com.keepalive.daemon.core.component.DaemonBaseService;
+import com.keepalive.daemon.core.component.WatchDogService;
 import com.keepalive.daemon.core.utils.Logger;
 
-public class KeepAliveService extends DaemonBaseService {
+public class KeepAliveService extends WatchDogService {
 
     @Override
     public IBinder onBind(Intent intent) {
