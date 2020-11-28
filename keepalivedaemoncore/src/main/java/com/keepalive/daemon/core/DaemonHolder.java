@@ -19,6 +19,8 @@ import com.keepalive.daemon.core.utils.ServiceHolder;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 public class DaemonHolder {
 
     static {
@@ -41,54 +43,54 @@ public class DaemonHolder {
     }
 
     public void attach(Context base, Application app) {
-        app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
-                Logger.v(Logger.TAG, String.format("====> [%s] created", activity.getLocalClassName()));
-                ServiceHolder.getInstance().bindService(activity, DaemonService.class,
-                        new ServiceHolder.OnServiceConnectionListener() {
-                            @Override
-                            public void onServiceConnection(ServiceConnection connection, boolean isConnected) {
-                                if (isConnected) {
-                                    connCache.put(activity, connection);
-                                }
-                            }
-                        });
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-                Logger.v(Logger.TAG, String.format("====> [%s] started", activity.getLocalClassName()));
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-                Logger.v(Logger.TAG, String.format("====> [%s] resumed", activity.getLocalClassName()));
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-                Logger.v(Logger.TAG, String.format("====> [%s] paused", activity.getLocalClassName()));
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-                Logger.v(Logger.TAG, String.format("====> [%s] stopped", activity.getLocalClassName()));
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-                Logger.v(Logger.TAG, String.format("====> [%s] save instance state", activity.getLocalClassName()));
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-                Logger.v(Logger.TAG, String.format("====> [%s] destroyed", activity.getLocalClassName()));
-                if (connCache.containsKey(activity)) {
-                    ServiceHolder.getInstance().unbindService(activity, connCache.get(activity));
-                }
-            }
-        });
+//        app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+//            @Override
+//            public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
+//                Logger.v(TAG, String.format("====> [%s] created", activity.getLocalClassName()));
+//                ServiceHolder.getInstance().bindService(activity, DaemonService.class,
+//                        new ServiceHolder.OnServiceConnectionListener() {
+//                            @Override
+//                            public void onServiceConnection(ServiceConnection connection, boolean isConnected) {
+//                                if (isConnected) {
+//                                    connCache.put(activity, connection);
+//                                }
+//                            }
+//                        });
+//            }
+//
+//            @Override
+//            public void onActivityStarted(Activity activity) {
+//                Logger.v(TAG, String.format("====> [%s] started", activity.getLocalClassName()));
+//            }
+//
+//            @Override
+//            public void onActivityResumed(Activity activity) {
+//                Logger.v(TAG, String.format("====> [%s] resumed", activity.getLocalClassName()));
+//            }
+//
+//            @Override
+//            public void onActivityPaused(Activity activity) {
+//                Logger.v(TAG, String.format("====> [%s] paused", activity.getLocalClassName()));
+//            }
+//
+//            @Override
+//            public void onActivityStopped(Activity activity) {
+//                Logger.v(TAG, String.format("====> [%s] stopped", activity.getLocalClassName()));
+//            }
+//
+//            @Override
+//            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+//                Logger.v(TAG, String.format("====> [%s] save instance state", activity.getLocalClassName()));
+//            }
+//
+//            @Override
+//            public void onActivityDestroyed(Activity activity) {
+//                Logger.v(TAG, String.format("====> [%s] destroyed", activity.getLocalClassName()));
+//                if (connCache.containsKey(activity)) {
+//                    ServiceHolder.getInstance().unbindService(activity, connCache.get(activity));
+//                }
+//            }
+//        });
 
         JavaDaemon.getInstance().fire(
                 base,

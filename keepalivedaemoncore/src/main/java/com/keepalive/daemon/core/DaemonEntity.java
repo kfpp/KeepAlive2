@@ -65,10 +65,10 @@ public class DaemonEntity implements Parcelable {
         }
         if (intent3 == null) {
             parcel.writeInt(0);
-            return;
+        } else {
+            parcel.writeInt(1);
+            intent3.writeToParcel(parcel, i);
         }
-        parcel.writeInt(1);
-        intent3.writeToParcel(parcel, i);
     }
 
     public static DaemonEntity create(String str) {

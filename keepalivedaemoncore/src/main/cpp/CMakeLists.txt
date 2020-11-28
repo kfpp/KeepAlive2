@@ -11,7 +11,6 @@ message(@@@${CMAKE_CURRENT_SOURCE_DIR})
 #link_directories(binder_libs/${CMAKE_ANDROID_ARCH_ABI})
 
 aux_source_directory(. SRC_LIST) # 搜索当前目录下的所有.cpp文件
-aux_source_directory(./utils UTIL_SRC_LIST)
 
 # open follow annotate, if you want to debug the code.
 # add_definitions(-DLIB_DEBUG)
@@ -23,11 +22,13 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        ${SRC_LIST} ${UTIL_SRC_LIST})
+        ${SRC_LIST}
+)
 
 find_library(log-lib log)
 
 target_link_libraries(
         daemon_core
-        ${log-lib})
+        ${log-lib}
+)
 

@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.keepalive.daemon.core">
 
-<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />-->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <instrumentation
         android:name="com.keepalive.daemon.core.component.DaemonInstrumentation"
@@ -34,21 +33,8 @@
             android:name="com.keepalive.daemon.core.notification.NotifyResidentService"
             android:process=":resident" />
 
-        <service
-            android:name="com.keepalive.daemon.core.KeepAliveService"
-            android:process="android.process.daemon" />
-
         <receiver
             android:name="com.keepalive.daemon.core.component.DaemonReceiver"
             android:exported="true" />
-
-        <receiver android:name="com.keepalive.daemon.core.receiver.AutoBootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.TIME_TICK" />
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
     </application>
 </manifest>

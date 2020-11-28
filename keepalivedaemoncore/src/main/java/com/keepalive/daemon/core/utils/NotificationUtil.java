@@ -125,10 +125,7 @@ public class NotificationUtil {
     }
 
     public static void showNotification(Service service, Notification notification) {
-        if (notification == null) {
-            return;
-        }
-
+        Logger.i(Logger.TAG, "call showNotification(): " + notification);
         try {
             service.startForeground(NOTIFICATION_ID, notification);
         } catch (Throwable th) {

@@ -12,11 +12,9 @@ import androidx.core.app.NotificationCompat;
 
 import com.keepalive.daemon.core.Constants;
 import com.keepalive.daemon.core.component.DaemonBaseService;
-import com.keepalive.daemon.core.component.DaemonService;
 import com.keepalive.daemon.core.component.MainProcessReceiver;
 import com.keepalive.daemon.core.utils.Logger;
 import com.keepalive.daemon.core.utils.NotificationUtil;
-import com.keepalive.daemon.core.utils.ServiceHolder;
 
 public class NotifyResidentService extends DaemonBaseService {
 
@@ -49,8 +47,6 @@ public class NotifyResidentService extends DaemonBaseService {
                 (RemoteViews) intent.getParcelableExtra(Constants.NOTI_REMOTE_VIEWS)
         );
         NotificationUtil.showNotification(this, noti);
-
-        ServiceHolder.getInstance().bindService(this, DaemonService.class, null);
         return super.onStartCommand(intent, flags, startId);
     }
 
