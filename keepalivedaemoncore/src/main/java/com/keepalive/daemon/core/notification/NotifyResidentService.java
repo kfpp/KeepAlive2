@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 
@@ -33,18 +34,23 @@ public class NotifyResidentService extends DaemonBaseService {
 
         doStartCommand(intent, flags, startId);
 
+        Bundle bundle = intent.getBundleExtra("noti_data");
+        if (bundle == null) {
+            Logger.w(Logger.TAG, "Oops!!! The notification bundle data is empty.");
+            return super.onStartCommand(intent, flags, startId);
+        }
         Notification noti = NotificationUtil.createNotification(
                 this,
-                intent.getIntExtra(Constants.NOTI_SMALL_ICON_ID, 0),
-                intent.getIntExtra(Constants.NOTI_LARGE_ICON_ID, 0),
-                intent.getStringExtra(Constants.NOTI_TITLE),
-                intent.getStringExtra(Constants.NOTI_TEXT),
-                intent.getBooleanExtra(Constants.NOTI_ONGOING, true),
-                intent.getIntExtra(Constants.NOTI_PRIORITY, NotificationCompat.PRIORITY_DEFAULT),
-                intent.getIntExtra(Constants.NOTI_IMPORTANCE, NotificationManager.IMPORTANCE_DEFAULT),
-                intent.getStringExtra(Constants.NOTI_TICKER_TEXT),
-                (PendingIntent) intent.getParcelableExtra(Constants.NOTI_PENDING_INTENT),
-                (RemoteViews) intent.getParcelableExtra(Constants.NOTI_REMOTE_VIEWS)
+                bundle.getInt(Constants.NOTI_SMALL_ICON_ID, 0),
+                bundle.getInt(Constants.NOTI_LARGE_ICON_ID, 0),
+                bundle.getString(Constants.NOTI_TITLE),
+                bundle.getString(Constants.NOTI_TEXT),
+                bundle.getBoolean(Constants.NOTI_ONGOING, true),
+                bundle.getInt(Constants.NOTI_PRIORITY, NotificationCompat.PRIORITY_DEFAULT),
+                bundle.getInt(Constants.NOTI_IMPORTANCE, NotificationManager.IMPORTANCE_DEFAULT),
+                bundle.getString(Constants.NOTI_TICKER_TEXT),
+                (PendingIntent) bundle.getParcelable(Constants.NOTI_PENDING_INTENT),
+                (RemoteViews) bundle.getParcelable(Constants.NOTI_REMOTE_VIEWS)
         );
         NotificationUtil.showNotification(this, noti);
         return super.onStartCommand(intent, flags, startId);

@@ -1,15 +1,12 @@
 package com.sogou;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import com.keepalive.daemon.core.Constants;
-import com.keepalive.daemon.core.utils.Logger;
+import com.keepalive.daemon.core.utils.ServiceHolder;
 import com.sogou.daemon.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,15 +20,12 @@ public class MainActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(MainActivity.this, MyService.class);
-//                    intent.putExtra(Constants.NOTI_SMALL_ICON_ID, R.drawable.notify_panel_notification_icon_bg);
-                    intent.putExtra(Constants.NOTI_TITLE, "You are Superman");
-                    intent.putExtra(Constants.NOTI_TEXT, "HaHaHa...");
-                    ContextCompat.startForegroundService(MainActivity.this, intent);
-                } catch (Throwable th) {
-                    Logger.e(Logger.TAG, "failed to start foreground service: " + th.getMessage());
-                }
+                new ServiceHolder.Builder(MainActivity.this)
+                        .attach(MyService.class)
+                        .smallIconId(R.drawable.notify_panel_notification_icon_bg)
+                        .title("You are Superman")
+                        .text("HaHaHa...")
+                        .fire();
             }
         });
     }

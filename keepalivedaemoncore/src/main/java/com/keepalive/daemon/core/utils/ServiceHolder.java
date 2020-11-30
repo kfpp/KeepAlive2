@@ -5,95 +5,20 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Parcelable;
 
 import androidx.core.content.ContextCompat;
 
-import com.keepalive.daemon.core.IMonitorService;
+import com.keepalive.daemon.core.Constants;
+import com.keepalive.daemon.core.notification.NotifyResidentService;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.ref.WeakReference;
 
 import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class ServiceHolder {
-
-    private static Map<ServiceConnection, Boolean> connCache = new HashMap<>();
-
-    private ServiceHolder() {
-    }
-
-    private static class Holder {
-        private volatile static ServiceHolder INSTANCE = new ServiceHolder();
-    }
-
-    public static ServiceHolder getInstance() {
-        return Holder.INSTANCE;
-    }
-
-    public static class ServiceConnectionImpl implements ServiceConnection {
-        private OnServiceConnectionListener listener;
-        private boolean isConnected;
-        private IMonitorService monitorService;
-
-        private ServiceConnectionImpl(OnServiceConnectionListener listener) {
-            this.listener = listener;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            if (listener != null) {
-                listener.onServiceConnection(this, false);
-            }
-            isConnected = false;
-            connCache.put(this, false);
-        }
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            Logger.d(TAG, "ComponentName: " + name + ", IBinder: " + service);
-            monitorService = IMonitorService.Stub.asInterface(service);
-            Logger.d(TAG, "IBinder asInterface: " + monitorService);
-            if (listener != null && monitorService != null) {
-                listener.onServiceConnection(this, true);
-            }
-            isConnected = true;
-            connCache.put(this, true);
-        }
-
-        private boolean isConnected() {
-            return isConnected;
-        }
-
-        public IMonitorService getMonitorService() {
-            return monitorService;
-        }
-    }
-
-    public boolean bindService(Context context, Class<? extends Service> clazz,
-                               OnServiceConnectionListener listener) {
-        Intent bindIntent = new Intent(context, clazz);
-        bindIntent.setAction(context.getPackageName() + ".monitor.BIND_SERVICE");
-        Logger.i(TAG, "call bindService(): " + bindIntent);
-        return context.bindService(bindIntent,
-                new ServiceConnectionImpl(listener),
-                Context.BIND_AUTO_CREATE
-        );
-    }
-
-    public void unbindService(Context context, ServiceConnection connection) {
-        if (connection != null && ((ServiceConnectionImpl) connection).isConnected()) {
-            try {
-                Logger.i(TAG, "call unbindService(): " + connection);
-                context.unbindService(connection);
-                if (connCache.containsKey(connection)) {
-                    connCache.remove(connection);
-                }
-            } catch (Throwable t) {
-                t.printStackTrace();
-            }
-        }
-    }
 
     public static void fireService(Context context, Class<? extends Service> clazz, boolean isForeground) {
         Logger.i(TAG, "call fireService(): service=" + clazz.getName() + ", isForeground=" + isForeground);
@@ -120,7 +45,80 @@ public class ServiceHolder {
         }
     }
 
-    public interface OnServiceConnectionListener {
-        void onServiceConnection(ServiceConnection connection, boolean isConnected);
+    public static class Builder {
+        private WeakReference<Context> wrCtx;
+        private Bundle bundle;
+        private Class<? extends NotifyResidentService> serviceClass;
+
+        public Builder(Context context) {
+            wrCtx = new WeakReference<>(context);
+            bundle = new Bundle();
+        }
+
+        public Builder smallIconId(int iconId) {
+            bundle.putInt(Constants.NOTI_SMALL_ICON_ID, iconId);
+            return this;
+        }
+
+        public Builder largeIconId(int iconId) {
+            bundle.putInt(Constants.NOTI_LARGE_ICON_ID, iconId);
+            return this;
+        }
+
+        public Builder title(CharSequence title) {
+            bundle.putCharSequence(Constants.NOTI_TITLE, title);
+            return this;
+        }
+
+        public Builder text(String text) {
+            bundle.putString(Constants.NOTI_TEXT, text);
+            return this;
+        }
+
+        public Builder ongoing(boolean ongoing) {
+            bundle.putBoolean(Constants.NOTI_ONGOING, ongoing);
+            return this;
+        }
+
+        public Builder priority(int priority) {
+            bundle.putInt(Constants.NOTI_PRIORITY, priority);
+            return this;
+        }
+
+        public Builder importance(int importance) {
+            bundle.putInt(Constants.NOTI_IMPORTANCE, importance);
+            return this;
+        }
+
+        public Builder tickerText(String tickerText) {
+            bundle.putString(Constants.NOTI_TICKER_TEXT, tickerText);
+            return this;
+        }
+
+        public Builder pendingIntent(Parcelable pendingIntent) {
+            bundle.putParcelable(Constants.NOTI_PENDING_INTENT, pendingIntent);
+            return this;
+        }
+
+        public Builder remoteViews(Parcelable remoteViews) {
+            bundle.putParcelable(Constants.NOTI_REMOTE_VIEWS, remoteViews);
+            return this;
+        }
+
+        public Builder attach(Class<? extends NotifyResidentService> serviceClass) {
+            this.serviceClass = serviceClass;
+            return this;
+        }
+
+        public void fire() {
+            try {
+                Intent intent = new Intent(wrCtx.get(),
+                        serviceClass == null ? NotifyResidentService.class : serviceClass);
+                intent.putExtra("noti_data", bundle);
+                ContextCompat.startForegroundService(wrCtx.get(), intent);
+            } catch (Throwable th) {
+                Logger.e(Logger.TAG, "Failed to start service: " + th.getMessage());
+            }
+        }
     }
 }

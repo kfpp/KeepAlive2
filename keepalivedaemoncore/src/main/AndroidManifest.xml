@@ -36,5 +36,7 @@
         <receiver
             android:name="com.keepalive.daemon.core.component.DaemonReceiver"
             android:exported="true" />
+
+        <receiver android:name="com.keepalive.daemon.core.component.MainProcessReceiver" />
     </application>
 </manifest>

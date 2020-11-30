@@ -61,7 +61,7 @@ public class ShellExecutor {
                 os.write("exit 156\n".getBytes());
                 os.flush();
                 proc.waitFor();
-//                read(br);
+                read(br);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
