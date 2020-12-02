@@ -7,18 +7,20 @@ import android.os.Bundle;
 import com.keepalive.daemon.core.utils.Logger;
 import com.keepalive.daemon.core.utils.ServiceHolder;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 public class DaemonInstrumentation extends Instrumentation {
 
     @Override
     public void callApplicationOnCreate(Application application) {
         super.callApplicationOnCreate(application);
-        Logger.v(Logger.TAG, "callApplicationOnCreate");
+        Logger.v(TAG, "callApplicationOnCreate");
     }
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        Logger.v(Logger.TAG, "onCreate");
+        Logger.v(TAG, "onCreate");
         ServiceHolder.fireService(getTargetContext(), DaemonService.class, false);
     }
 }

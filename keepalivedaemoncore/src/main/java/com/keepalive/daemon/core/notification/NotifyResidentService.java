@@ -13,9 +13,11 @@ import androidx.core.app.NotificationCompat;
 
 import com.keepalive.daemon.core.Constants;
 import com.keepalive.daemon.core.component.DaemonBaseService;
-import com.keepalive.daemon.core.component.MainProcessReceiver;
+import com.keepalive.daemon.core.daemon.MainProcessReceiver;
 import com.keepalive.daemon.core.utils.Logger;
 import com.keepalive.daemon.core.utils.NotificationUtil;
+
+import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class NotifyResidentService extends DaemonBaseService {
 
@@ -29,14 +31,14 @@ public class NotifyResidentService extends DaemonBaseService {
 
     @Override
     public final int onStartCommand(Intent intent, int flags, int startId) {
-        Logger.d(Logger.TAG, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " +
+        Logger.d(TAG, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " +
                 "intent: " + intent + ", startId: " + startId);
 
         doStartCommand(intent, flags, startId);
 
         Bundle bundle = intent.getBundleExtra("noti_data");
         if (bundle == null) {
-            Logger.w(Logger.TAG, "Oops!!! The notification bundle data is empty.");
+            Logger.w(TAG, "Oops!!! The notification bundle data is empty.");
             return super.onStartCommand(intent, flags, startId);
         }
         Notification noti = NotificationUtil.createNotification(

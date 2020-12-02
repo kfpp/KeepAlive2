@@ -117,7 +117,7 @@ public class ServiceHolder {
                 intent.putExtra("noti_data", bundle);
                 ContextCompat.startForegroundService(wrCtx.get(), intent);
             } catch (Throwable th) {
-                Logger.e(Logger.TAG, "Failed to start service: " + th.getMessage());
+                Logger.e(TAG, "Failed to start service: " + th.getMessage());
             }
         }
     }

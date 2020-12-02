@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.util.Map;
 
 import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
+import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class ShellExecutor {
 
@@ -17,7 +18,7 @@ public class ShellExecutor {
         try {
             ProcessBuilder builder = new ProcessBuilder(new String[0]);
             String envPath = System.getenv("PATH");
-            Logger.v(Logger.TAG, "ENV PATH: " + envPath);
+            Logger.v(TAG, "ENV PATH: " + envPath);
             if (envPath != null) {
                 String[] split = envPath.split(COLON_SEPARATOR);
                 int length = split.length;
@@ -81,7 +82,7 @@ public class ShellExecutor {
             sb.append(readLine);
             sb.append("\n");
         }
-        Logger.v(Logger.TAG, "read: " + sb);
+        Logger.v(TAG, "read: " + sb);
         return sb.toString();
     }
 }

@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
+import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class JavaDaemon {
     private volatile static FutureScheduler scheduler;
@@ -53,7 +54,7 @@ public class JavaDaemon {
     }
 
     private void fire(Context context, DaemonEnv env, String[] args) {
-        Logger.i(Logger.TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! fire(): "
+        Logger.i(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! fire(): "
                 + "env=" + env + ", args=" + Arrays.toString(args));
         boolean hit = false;
         String processName = env.processName;
@@ -68,14 +69,14 @@ public class JavaDaemon {
                 }
             }
             if (hit) {
-                Logger.v(Logger.TAG, "app lock file start: " + niceName);
-                NativeKeepAlive.lockFile(context.getFilesDir() + "/" + niceName + "_d");
-                Logger.v(Logger.TAG, "app lock file finish");
+                Logger.v(TAG, "app lock file start: " + niceName);
+                NativeKeepAlive.lockFile(context.getFilesDir() + "/" + niceName + "_daemon");
+                Logger.v(TAG, "app lock file finish");
                 String[] strArr = new String[list.size()];
                 for (int i = 0; i < strArr.length; i++) {
-                    strArr[i] = context.getFilesDir() + "/" + list.get(i) + "_d";
+                    strArr[i] = context.getFilesDir() + "/" + list.get(i) + "_daemon";
                 }
-                scheduler.scheduleFuture(new AppProcessRunnable(env, strArr, niceName), 0);
+                scheduler.scheduleFuture(new AppProcessRunnable(env, strArr, "daemon"), 0);
             }
         } else if (processName.equals(context.getPackageName())) {
             ServiceHolder.fireService(context, DaemonService.class, false);

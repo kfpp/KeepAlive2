@@ -6,6 +6,8 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 /**
  * app_process [vm-options] cmd-dir [options] start-class-name [main-options]
  * <p>
@@ -56,7 +58,7 @@ public class AppProcessRunnable implements Runnable {
                             "app_process32" : "app_process", DaemonMain.class.getCanonicalName(),
                             entity.toString(), niceName}));
         }
-        Logger.d(Logger.TAG, "shell commands: " + list);
+        Logger.d(TAG, "shell commands: " + list);
         File file = new File("/");
         String[] strArr = new String[list.size()];
         for (int i = 0; i < strArr.length; i++) {

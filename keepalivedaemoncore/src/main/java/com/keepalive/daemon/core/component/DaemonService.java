@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat;
 import com.keepalive.daemon.core.notification.NotifyResidentService;
 import com.keepalive.daemon.core.utils.Logger;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 public class DaemonService extends Service {
 
     @Override
@@ -23,7 +25,7 @@ public class DaemonService extends Service {
             ContextCompat.startForegroundService(this,
                     new Intent().setClassName(getPackageName(), NotifyResidentService.class.getName()));
         } catch (Throwable th) {
-            Logger.e(Logger.TAG, "failed to start foreground service: " + th.getMessage());
+            Logger.e(TAG, "failed to start foreground service: " + th.getMessage());
         }
         startService(new Intent().setClassName(getPackageName(), AssistService1.class.getName()));
         startService(new Intent().setClassName(getPackageName(), AssistService2.class.getName()));

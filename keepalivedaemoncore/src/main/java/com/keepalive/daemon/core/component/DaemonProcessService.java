@@ -6,6 +6,8 @@ import android.os.IBinder;
 
 import com.keepalive.daemon.core.utils.Logger;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 public class DaemonProcessService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
@@ -15,6 +17,6 @@ public class DaemonProcessService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.v(Logger.TAG, "onCreate");
+        Logger.v(TAG, "onCreate");
     }
 }

@@ -9,8 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.keepalive.daemon.core.component.DaemonInstrumentation;
-import com.keepalive.daemon.core.component.DaemonReceiver;
 import com.keepalive.daemon.core.component.DaemonService;
+import com.keepalive.daemon.core.daemon.DaemonReceiver;
 import com.keepalive.daemon.core.notification.NotifyResidentService;
 import com.keepalive.daemon.core.utils.HiddenApiWrapper;
 import com.keepalive.daemon.core.utils.Logger;

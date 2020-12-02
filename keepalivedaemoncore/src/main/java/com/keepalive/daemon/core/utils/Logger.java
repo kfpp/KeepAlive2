@@ -151,7 +151,7 @@ public class Logger {
                 fp.close();
             }
         } catch (Exception e) {
-            Log.d(Logger.TAG, "error : " + e);
+            Log.d(TAG, "error : " + e);
         }
     }
 }

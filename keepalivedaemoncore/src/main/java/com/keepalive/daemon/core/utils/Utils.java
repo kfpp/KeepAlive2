@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 public class Utils {
 
     public static String getProcessName() {
@@ -15,7 +17,7 @@ public class Utils {
             File file = new File("/proc/self/cmdline");
             mBufferedReader = new BufferedReader(new FileReader(file));
             String value = mBufferedReader.readLine().trim();
-            Logger.v(Logger.TAG, ">>>------------------------->>> processName: " + value);
+            Logger.v(TAG, ">>>------------------------->>> processName: " + value);
             return value;
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,12 +38,12 @@ public class Utils {
         // 当前应用的进程ID
         int pid = android.os.Process.myPid();
         String path = "/proc/" + pid + "/maps";
-        Logger.v(Logger.TAG, "maps path: " + path);
+        Logger.v(TAG, "maps path: " + path);
         File file = new File(path);
         if (file.exists() && file.isFile()) {
             allSOLists = readFileByLines(file.getAbsolutePath());
         } else {
-            Logger.w(Logger.TAG, "不存在[" + path + "]文件.");
+            Logger.w(TAG, "不存在[" + path + "]文件.");
         }
 
         if (allSOLists == null || allSOLists.size() == 0) {
@@ -63,7 +65,7 @@ public class Utils {
                     if (index != -1) {
                         String str = tempString.substring(index);
                         if (!allSOLists.contains(str)) {
-                            Logger.v(Logger.TAG, "str: " + str);
+                            Logger.v(TAG, "str: " + str);
                             // 所有so库（包括系统的，即包含/system/目录下的）
                             allSOLists.add(str);
                         }

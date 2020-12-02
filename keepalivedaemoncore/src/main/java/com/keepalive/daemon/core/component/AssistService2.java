@@ -6,6 +6,8 @@ import android.os.IBinder;
 
 import com.keepalive.daemon.core.utils.Logger;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 public class AssistService2 extends Service {
 
     @Override
@@ -16,6 +18,6 @@ public class AssistService2 extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.i(Logger.TAG, "call onCreate()");
+        Logger.i(TAG, "call onCreate()");
     }
 }

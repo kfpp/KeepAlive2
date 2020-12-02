@@ -17,6 +17,8 @@
 
 package com.keepalive.daemon.core.utils;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 public class RuntimeUtil {
 
     private volatile static boolean g64 = false;
@@ -31,12 +33,12 @@ public class RuntimeUtil {
                             .getDeclaredMethod("getRuntime")
                             .invoke(null));
         } catch (Throwable th) {
-            Logger.e(Logger.TAG, "get is64Bit failed, default not 64bit!", th);
+            Logger.e(TAG, "get is64Bit failed, default not 64bit!", th);
             g64 = false;
         }
         isArt = System.getProperty("java.vm.version").startsWith("2");
         archType = CPUArchUtil.getArchType();
-        Logger.i(Logger.TAG, "is64Bit: " + g64 + ", isArt: " + isArt + ", archType: " + archType);
+        Logger.i(TAG, "is64Bit: " + g64 + ", isArt: " + isArt + ", archType: " + archType);
     }
 
     public static boolean is64Bit() {

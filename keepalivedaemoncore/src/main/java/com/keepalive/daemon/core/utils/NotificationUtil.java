@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 import com.keepalive.daemon.core.R;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
+import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class NotificationUtil {
 
@@ -36,7 +37,7 @@ public class NotificationUtil {
                                                   CharSequence tickerText,
                                                   PendingIntent pendingIntent,
                                                   RemoteViews views) {
-        Logger.d(Logger.TAG, "call createNotification(): smallIconId=" + smallIconId
+        Logger.d(TAG, "call createNotification(): smallIconId=" + smallIconId
                 + ", largeIconId=" + largeIconId + ", title=" + title + ", text=" + text
                 + ", ongoing=" + ongoing + ", pri=" + pri + ", tickerText=" + tickerText
                 + ", pendingIntent=" + pendingIntent + ", remoteViews=" + views);
@@ -125,7 +126,7 @@ public class NotificationUtil {
     }
 
     public static void showNotification(Service service, Notification notification) {
-        Logger.i(Logger.TAG, "call showNotification(): " + notification);
+        Logger.i(TAG, "call showNotification(): " + notification);
         try {
             service.startForeground(NOTIFICATION_ID, notification);
         } catch (Throwable th) {
