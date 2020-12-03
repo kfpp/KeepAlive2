@@ -54,13 +54,17 @@ bool wait_file_lock(const char *lock_file_path) {
 }
 
 void keep_alive_set_sid(JNIEnv *env, jclass jclazz) {
-    LOGD("------ original child process PID is: %d", getpid());
+    pid_t old_pid = getpid();
+    LOGD("------ original child process PID is: %d", old_pid);
     LOGD("------ original child process PGID is: %d", getpgrp());
-    LOGD("------ original child process SID is: %d", getsid(0));
+    LOGD("------ original child process SID is: %d", getsid(old_pid));
+
     setsid();
-    LOGD("++++++ changed child process PID is: %d", getpid());
+
+    pid_t new_pid = getpid();
+    LOGD("++++++ changed child process PID is: %d", new_pid);
     LOGD("++++++ changed child process PGID is: %d", getpgrp());
-    LOGD("++++++ changed child process SID is: %d", getsid(0));
+    LOGD("++++++ changed child process SID is: %d", getsid(new_pid));
 }
 
 void keep_alive_wait_file_lock(JNIEnv *env, jclass jclazz, jstring path) {
