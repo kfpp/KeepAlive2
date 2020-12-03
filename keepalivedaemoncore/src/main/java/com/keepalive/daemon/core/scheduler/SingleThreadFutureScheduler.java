@@ -1,5 +1,6 @@
 package com.keepalive.daemon.core.scheduler;
 
+import android.os.Process;
 import android.util.Log;
 
 import java.util.concurrent.Callable;
@@ -13,11 +14,18 @@ public class SingleThreadFutureScheduler implements FutureScheduler {
     private static final String TAG = "FutureScheduler";
     private ScheduledThreadPoolExecutor scheduledThreadPoolExecutor;
 
-    public SingleThreadFutureScheduler(final String source, boolean doKeepAlive) {
-        this.scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(
+    public SingleThreadFutureScheduler(String source, boolean doKeepAlive) {
+        this(source,
+                Process.THREAD_PRIORITY_BACKGROUND + Process.THREAD_PRIORITY_MORE_FAVORABLE,
+                doKeepAlive
+        );
+    }
+
+    public SingleThreadFutureScheduler(final String source, final int priority, boolean doKeepAlive) {
+        scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(
                 1,
-                new ThreadFactoryWrapper(source),
-                new RejectedExecutionHandler() {     // Logs rejected runnables rejected from the entering the pool
+                new ThreadFactoryWrapper(source, priority),
+                new RejectedExecutionHandler() { // Logs rejected runnables rejected from the entering the pool
                     @Override
                     public void rejectedExecution(Runnable runnable, ThreadPoolExecutor executor) {
                         Log.w(TAG, String.format("Runnable [%s] rejected from [%s] ",

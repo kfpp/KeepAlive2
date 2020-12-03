@@ -14,14 +14,20 @@ extern "C" {
 int lock_file(const char *lock_file_path) {
     LOGD("try to lock file >> %s <<", lock_file_path);
     int lockFileDescriptor = open(lock_file_path, O_RDONLY);
-    LOGD("open [%s] : %d", lock_file_path, lockFileDescriptor);
     if (lockFileDescriptor == -1) {
         lockFileDescriptor = open(lock_file_path, O_CREAT,
                                   S_IRUSR | S_IXUSR | S_IRWXG | S_IWGRP | S_IRWXO | S_IXOTH);
-        LOGD("open [%s] : %d", lock_file_path, lockFileDescriptor);
+        if (lockFileDescriptor != -1) {
+            LOGD("success to create file >> %s <<", lock_file_path);
+        } else {
+            LOGE("failed to create file >> %s <<", lock_file_path);
+            return 0;
+        }
+    } else {
+        LOGD("success to open file >> %s <<", lock_file_path);
     }
     int lockRet = flock(lockFileDescriptor, LOCK_EX);
-    LOGD("flock [%s:%d] : %d", lock_file_path, lockFileDescriptor, lockRet);
+//    LOGD("flock [%s:%d] : %d", lock_file_path, lockFileDescriptor, lockRet);
     if (lockRet == -1) {
         LOGE("failed to lock file >> %s <<", lock_file_path);
         return 0;
@@ -32,19 +38,32 @@ int lock_file(const char *lock_file_path) {
 }
 
 bool wait_file_lock(const char *lock_file_path) {
+    LOGD("wait to lock file >> %s <<", lock_file_path);
     int lockFileDescriptor = open(lock_file_path, O_RDONLY);
-    if (lockFileDescriptor == -1)
+    if (lockFileDescriptor == -1) {
         lockFileDescriptor = open(lock_file_path, O_CREAT,
                                   S_IRUSR | S_IXUSR | S_IRWXG | S_IWGRP | S_IRWXO | S_IXOTH);
-    while (flock(lockFileDescriptor, LOCK_EX | LOCK_NB) != -1) {
-        usleep(0x3E8u);
+        if (lockFileDescriptor != -1) {
+            LOGD("success to create file >> %s <<", lock_file_path);
+        } else {
+            LOGE("failed to create file >> %s <<", lock_file_path);
+            return false;
+        }
     }
 
-    LOGD("retry to lock file >> %s << %d", lock_file_path, -1);
+    LOGD("start to wait for locking file >> %s <<", lock_file_path);
+    int retry = 0;
+    while (flock(lockFileDescriptor, LOCK_EX | LOCK_NB) != -1) {
+        usleep(0x3E8u);
+        LOGD("waiting for 1ms to retry %d time(s) to lock file >> %s <<", ++retry, lock_file_path);
+    }
+    LOGD("end to wait for locking file >> %s <<", lock_file_path);
 
-    int err_no = flock(lockFileDescriptor, LOCK_EX);
-    LOGD("flock [%s:%d] : %d", lock_file_path, lockFileDescriptor, err_no);
-    bool ret = err_no != -1;
+    LOGD("retry to lock file >> %s <<", lock_file_path);
+
+    int lockRet = flock(lockFileDescriptor, LOCK_EX);
+//    LOGD("flock [%s:%d] : %d", lock_file_path, lockFileDescriptor, lockRet);
+    bool ret = lockRet != -1;
     if (ret) {
         LOGD("success to lock file >> %s <<", lock_file_path);
     } else {
@@ -55,16 +74,12 @@ bool wait_file_lock(const char *lock_file_path) {
 
 void keep_alive_set_sid(JNIEnv *env, jclass jclazz) {
     pid_t old_pid = getpid();
-    LOGD("------ original child process PID is: %d", old_pid);
-    LOGD("------ original child process PGID is: %d", getpgrp());
-    LOGD("------ original child process SID is: %d", getsid(old_pid));
+    LOGD("------ PID: %d, PGID: %d, SID: %d", old_pid, getpgrp(), getsid(old_pid));
 
     setsid();
 
     pid_t new_pid = getpid();
-    LOGD("++++++ changed child process PID is: %d", new_pid);
-    LOGD("++++++ changed child process PGID is: %d", getpgrp());
-    LOGD("++++++ changed child process SID is: %d", getsid(new_pid));
+    LOGD("++++++ PID: %d, PGID: %d, SID: %d", new_pid, getpgrp(), getsid(new_pid));
 }
 
 void keep_alive_wait_file_lock(JNIEnv *env, jclass jclazz, jstring path) {

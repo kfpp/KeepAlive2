@@ -18,6 +18,6 @@ public class AssistService1 extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.i(TAG, "call onCreate()");
+        Logger.i(TAG, "!!");
     }
 }

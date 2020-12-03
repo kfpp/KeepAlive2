@@ -1,24 +1,25 @@
 package com.keepalive.daemon.core.scheduler;
 
-import android.os.Process;
 import android.util.Log;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
 public class ThreadFactoryWrapper implements ThreadFactory {
-    private static final String TAG = "ThreadFactoryWrapper";
+    private static final String TAG = "ThreadFactory";
     private String source;
+    private int priority;
 
-    public ThreadFactoryWrapper(String source) {
+    public ThreadFactoryWrapper(String source, int priority) {
         this.source = source;
+        this.priority = priority;
     }
 
     @Override
     public Thread newThread(Runnable runnable) {
         Thread thread = Executors.defaultThreadFactory().newThread(runnable);
 
-        thread.setPriority(Process.THREAD_PRIORITY_BACKGROUND + Process.THREAD_PRIORITY_MORE_FAVORABLE);
+        thread.setPriority(priority);
         thread.setName("Core-" + thread.getName() + "-" + source);
         thread.setDaemon(true);
 

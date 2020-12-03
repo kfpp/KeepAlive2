@@ -37,10 +37,10 @@ public class NotificationUtil {
                                                   CharSequence tickerText,
                                                   PendingIntent pendingIntent,
                                                   RemoteViews views) {
-        Logger.d(TAG, "call createNotification(): smallIconId=" + smallIconId
-                + ", largeIconId=" + largeIconId + ", title=" + title + ", text=" + text
-                + ", ongoing=" + ongoing + ", pri=" + pri + ", tickerText=" + tickerText
-                + ", pendingIntent=" + pendingIntent + ", remoteViews=" + views);
+        Logger.d(TAG, "smallIconId=" + smallIconId + ", largeIconId="
+                + largeIconId + ", title=" + title + ", text=" + text + ", ongoing=" + ongoing
+                + ", pri=" + pri + ", tickerText=" + tickerText + ", pendingIntent=" + pendingIntent
+                + ", remoteViews=" + views);
         NotificationManager nm = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
         // 唯一的通知通道的id.
@@ -126,7 +126,7 @@ public class NotificationUtil {
     }
 
     public static void showNotification(Service service, Notification notification) {
-        Logger.i(TAG, "call showNotification(): " + notification);
+        Logger.i(TAG, "!! ---> " + notification);
         try {
             service.startForeground(NOTIFICATION_ID, notification);
         } catch (Throwable th) {

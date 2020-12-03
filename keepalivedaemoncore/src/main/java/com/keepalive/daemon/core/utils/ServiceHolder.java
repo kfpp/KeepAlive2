@@ -21,7 +21,7 @@ import static com.keepalive.daemon.core.utils.Logger.TAG;
 public class ServiceHolder {
 
     public static void fireService(Context context, Class<? extends Service> clazz, boolean isForeground) {
-        Logger.i(TAG, "call fireService(): service=" + clazz.getName() + ", isForeground=" + isForeground);
+        Logger.i(TAG, "service=" + clazz.getName() + ", isForeground=" + isForeground);
         Intent intent = new Intent(context, clazz);
         try {
             if (isForeground) {

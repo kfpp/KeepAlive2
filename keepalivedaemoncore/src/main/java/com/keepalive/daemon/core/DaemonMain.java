@@ -6,6 +6,8 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Process;
 
+import com.keepalive.daemon.core.scheduler.FutureScheduler;
+import com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler;
 import com.keepalive.daemon.core.utils.Logger;
 
 import java.lang.ref.WeakReference;
@@ -23,12 +25,26 @@ public class DaemonMain {
     private Parcel p3;
     private IBinder binder;
 
+    private static volatile FutureScheduler futureScheduler;
+
     private DaemonMain(DaemonEntity entity) {
         this.entity = entity;
     }
 
     public static void main(String[] args) {
-        Logger.d(TAG, "call main(): " + Arrays.toString(args));
+        Logger.d(TAG, Arrays.toString(args));
+        if (futureScheduler == null) {
+            synchronized (DaemonMain.class) {
+                if (futureScheduler == null) {
+                    futureScheduler = new SingleThreadFutureScheduler(
+                            "daemonmain-holder",
+                            Thread.MAX_PRIORITY,
+                            true
+                    );
+                }
+            }
+        }
+
         DaemonEntity entity = DaemonEntity.create(args[0]);
         if (entity != null) {
             new DaemonMain(entity).execute();
@@ -49,7 +65,7 @@ public class DaemonMain {
                 e.printStackTrace();
             }
             for (int i = 1; i < entity.args.length; i++) {
-                new DaemonThread(this, i).start();
+                futureScheduler.scheduleFuture(new DaemonRunnable(this, i), 0);
             }
             Logger.v(TAG, "[" + entity.niceName + "] wait file lock start: " + entity.args[0]);
             NativeKeepAlive.waitFileLock(entity.args[0]);
@@ -64,7 +80,7 @@ public class DaemonMain {
     }
 
     public void startInstrumentation() {
-        Logger.i(TAG, "call startInstrumentation(): " + p3);
+        Logger.i(TAG, "!! ---> " + p3);
         if (p3 != null) {
             try {
                 binder.transact(binderManager.startInstrumentation(), p3, null, 1);
@@ -75,7 +91,7 @@ public class DaemonMain {
     }
 
     public void broadcastIntent() {
-        Logger.i(TAG, "call broadcastIntent(): " + p2);
+        Logger.i(TAG, "!! ---> " + p2);
         if (p2 != null) {
             try {
                 binder.transact(binderManager.broadcastIntent(), p2, null, 1);
@@ -86,7 +102,7 @@ public class DaemonMain {
     }
 
     public void startService() {
-        Logger.i(TAG, "call startService(): " + p);
+        Logger.i(TAG, "!! ---> " + p);
         if (p != null) {
             try {
                 binder.transact(binderManager.startService(), p, null, 1);
@@ -97,7 +113,7 @@ public class DaemonMain {
     }
 
     private void assembleParcel() {
-        Logger.d(TAG, "call assembleParcel()");
+        Logger.d(TAG, "!!");
         assembleServiceParcel();
         assembleBroadcastParcel();
         assembleInstrumentationParcel();
@@ -125,7 +141,7 @@ public class DaemonMain {
      * }
      */
     private void assembleServiceParcel() {
-        Logger.d(TAG, "call assembleServiceParcel()");
+        Logger.d(TAG, "!!");
         p = Parcel.obtain();
         p.writeInterfaceToken("android.app.IActivityManager");
         p.writeStrongBinder(null);
@@ -145,7 +161,7 @@ public class DaemonMain {
 
     @SuppressLint("WrongConstant")
     private void assembleBroadcastParcel() {
-        Logger.d(TAG, "call assembleBroadcastParcel()");
+        Logger.d(TAG, "!!");
         p2 = Parcel.obtain();
         p2.writeInterfaceToken("android.app.IActivityManager");
         p2.writeStrongBinder(null);
@@ -168,7 +184,7 @@ public class DaemonMain {
     }
 
     private void assembleInstrumentationParcel() {
-        Logger.d(TAG, "call assembleInstrumentationParcel()");
+        Logger.d(TAG, "!!");
         p3 = Parcel.obtain();
         p3.writeInterfaceToken("android.app.IActivityManager");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -208,18 +224,17 @@ public class DaemonMain {
         }
     }
 
-    static class DaemonThread extends Thread {
+    static class DaemonRunnable implements Runnable {
         private WeakReference<DaemonMain> thiz;
         private int index;
 
-        private DaemonThread(DaemonMain thiz, int index) {
+        private DaemonRunnable(DaemonMain thiz, int index) {
             this.thiz = new WeakReference<>(thiz);
             this.index = index;
         }
 
         @Override
         public void run() {
-            setPriority(MAX_PRIORITY);
             Logger.v(TAG, "[Thread] wait file lock start: " + index);
             NativeKeepAlive.waitFileLock(thiz.get().entity.args[index]);
             Logger.v(TAG, "[Thread] wait file lock finished");

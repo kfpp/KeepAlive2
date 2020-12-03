@@ -3,7 +3,7 @@ package com.keepalive.daemon.core.scheduler;
 import android.util.Log;
 
 public class RunnableWrapper implements Runnable {
-    private static final String TAG = "RunnableWrapper";
+    private static final String TAG = "Runnable";
     private Runnable runnable;
 
     RunnableWrapper(Runnable runnable) {
@@ -15,7 +15,7 @@ public class RunnableWrapper implements Runnable {
         try {
             runnable.run();
         } catch (Throwable t) {
-            Log.e(TAG, String.format("Runnable error [%s] of type [%s]",
+            Log.e(TAG, String.format("Run error [%s] of type [%s]",
                     t.getMessage(), t.getClass().getCanonicalName()));
         }
     }
