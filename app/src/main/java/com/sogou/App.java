@@ -15,13 +15,21 @@ public class App extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        Logger.v(Logger.TAG, "attachBaseContext");
-        DaemonHolder.getInstance().attach(base, this);
+        DaemonHolder.getInstance().attach(base);
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        boolean inDaemonProcess = DaemonHolder.getInstance().inDaemonProcess();
+        Logger.d(Logger.TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inDaemonProcess: "
+                + inDaemonProcess);
+        if (!inDaemonProcess) {
+            boolean inMainProcess = DaemonHolder.getInstance().inMainProcess(this);
+            Logger.d(Logger.TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inMainProcess: "
+                    + inMainProcess);
+        }
 
         Intent i = new Intent(this, MainActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

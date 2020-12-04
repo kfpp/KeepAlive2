@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 
-import com.keepalive.daemon.core.component.DaemonService;
 import com.keepalive.daemon.core.scheduler.FutureScheduler;
 import com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler;
 import com.keepalive.daemon.core.utils.Logger;
-import com.keepalive.daemon.core.utils.ServiceHolder;
 import com.keepalive.daemon.core.utils.Utils;
 
 import java.util.ArrayList;
@@ -16,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
+import static com.keepalive.daemon.core.Constants.PROCS;
 import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class JavaDaemon {
@@ -49,28 +48,27 @@ public class JavaDaemon {
         env.intent3 = intent3;
         env.processName = Utils.getProcessName();
 
-        String[] args = {"daemon", "assist1", "assist2"};
-        fire(context, env, args);
+        fire(context, env, PROCS);
     }
 
     private void fire(Context context, DaemonEnv env, String[] args) {
         Logger.i(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! fire(): "
                 + "env=" + env + ", args=" + Arrays.toString(args));
-        boolean hit = false;
+        boolean isHitted = false;
         String processName = env.processName;
         if (processName.startsWith(context.getPackageName()) && processName.contains(COLON_SEPARATOR)) {
-            String niceName = processName.substring(processName.lastIndexOf(COLON_SEPARATOR) + 1);
+            String proc = processName.substring(processName.lastIndexOf(COLON_SEPARATOR) + 1);
             List<String> list = new ArrayList();
             for (String arg : args) {
-                if (arg.equals(niceName)) {
-                    hit = true;
+                if (arg.equals(proc)) {
+                    isHitted = true;
                 } else {
                     list.add(arg);
                 }
             }
-            if (hit) {
-                Logger.v(TAG, "app lock file start: " + niceName);
-                NativeKeepAlive.lockFile(context.getFilesDir() + "/" + niceName + "_daemon");
+            if (isHitted) {
+                Logger.v(TAG, "app lock file start: " + proc);
+                NativeKeepAlive.lockFile(context.getFilesDir() + "/" + proc + "_daemon");
                 Logger.v(TAG, "app lock file finish");
                 String[] strArr = new String[list.size()];
                 for (int i = 0; i < strArr.length; i++) {
@@ -78,8 +76,6 @@ public class JavaDaemon {
                 }
                 scheduler.scheduleFuture(new AppProcessRunnable(env, strArr, "daemon"), 0);
             }
-        } else if (processName.equals(context.getPackageName())) {
-            ServiceHolder.fireService(context, DaemonService.class, false);
         }
     }
 }

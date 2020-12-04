@@ -1,25 +1,17 @@
 package com.keepalive.daemon.core;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Build;
-import android.os.Bundle;
 
 import com.keepalive.daemon.core.component.DaemonInstrumentation;
 import com.keepalive.daemon.core.component.DaemonService;
 import com.keepalive.daemon.core.daemon.DaemonReceiver;
-import com.keepalive.daemon.core.notification.NotifyResidentService;
 import com.keepalive.daemon.core.utils.HiddenApiWrapper;
-import com.keepalive.daemon.core.utils.Logger;
-import com.keepalive.daemon.core.utils.ServiceHolder;
+import com.keepalive.daemon.core.utils.Utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.keepalive.daemon.core.utils.Logger.TAG;
+import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
+import static com.keepalive.daemon.core.Constants.PROCS;
 
 public class DaemonHolder {
 
@@ -28,8 +20,6 @@ public class DaemonHolder {
             HiddenApiWrapper.exemptAll();
         }
     }
-
-    private static Map<Activity, ServiceConnection> connCache = new HashMap<>();
 
     private DaemonHolder() {
     }
@@ -42,75 +32,32 @@ public class DaemonHolder {
         return Holder.INSTANCE;
     }
 
-    public void attach(Context base, Application app) {
-//        app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-//            @Override
-//            public void onActivityCreated(final Activity activity, Bundle savedInstanceState) {
-//                Logger.v(TAG, String.format("====> [%s] created", activity.getLocalClassName()));
-//                ServiceHolder.getInstance().bindService(activity, DaemonService.class,
-//                        new ServiceHolder.OnServiceConnectionListener() {
-//                            @Override
-//                            public void onServiceConnection(ServiceConnection connection, boolean isConnected) {
-//                                if (isConnected) {
-//                                    connCache.put(activity, connection);
-//                                }
-//                            }
-//                        });
-//            }
-//
-//            @Override
-//            public void onActivityStarted(Activity activity) {
-//                Logger.v(TAG, String.format("====> [%s] started", activity.getLocalClassName()));
-//            }
-//
-//            @Override
-//            public void onActivityResumed(Activity activity) {
-//                Logger.v(TAG, String.format("====> [%s] resumed", activity.getLocalClassName()));
-//            }
-//
-//            @Override
-//            public void onActivityPaused(Activity activity) {
-//                Logger.v(TAG, String.format("====> [%s] paused", activity.getLocalClassName()));
-//            }
-//
-//            @Override
-//            public void onActivityStopped(Activity activity) {
-//                Logger.v(TAG, String.format("====> [%s] stopped", activity.getLocalClassName()));
-//            }
-//
-//            @Override
-//            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-//                Logger.v(TAG, String.format("====> [%s] save instance state", activity.getLocalClassName()));
-//            }
-//
-//            @Override
-//            public void onActivityDestroyed(Activity activity) {
-//                Logger.v(TAG, String.format("====> [%s] destroyed", activity.getLocalClassName()));
-//                if (connCache.containsKey(activity)) {
-//                    ServiceHolder.getInstance().unbindService(activity, connCache.get(activity));
-//                }
-//            }
-//        });
-
+    public void attach(Context base) {
         JavaDaemon.getInstance().fire(
                 base,
                 new Intent(base, DaemonService.class),
                 new Intent(base, DaemonReceiver.class),
                 new Intent(base, DaemonInstrumentation.class)
         );
+    }
 
-//        KeepAliveConfigs configs = new KeepAliveConfigs(
-//                new KeepAliveConfigs.Config(base.getPackageName() + ":resident",
-//                        NotifyResidentService.class.getCanonicalName()));
-////        configs.ignoreBatteryOptimization();
-////        configs.rebootThreshold(10 * 1000, 3);
-//        configs.setOnBootReceivedListener(new KeepAliveConfigs.OnBootReceivedListener() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                Logger.d(Logger.TAG, "############################# onReceive(): intent=" + intent);
-//                ServiceHolder.fireService(context, DaemonService.class, false);
-//            }
-//        });
-//        KeepAlive.init(base, configs);
+    public boolean inDaemonProcess() {
+        String processName = Utils.getProcessName();
+        for (String proc : PROCS) {
+            if (!processName.endsWith(COLON_SEPARATOR + proc)) {
+                continue;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean inMainProcess(Context context) {
+        String processName = Utils.getProcessName();
+        if (context.getPackageName().equals(processName)) {
+            return true;
+        }
+        return false;
     }
 }

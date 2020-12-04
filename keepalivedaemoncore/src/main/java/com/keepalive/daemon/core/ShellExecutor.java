@@ -18,7 +18,6 @@ public class ShellExecutor {
         try {
             ProcessBuilder builder = new ProcessBuilder(new String[0]);
             String envPath = System.getenv("PATH");
-            Logger.v(TAG, "ENV PATH: " + envPath);
             if (envPath != null) {
                 String[] split = envPath.split(COLON_SEPARATOR);
                 int length = split.length;
@@ -41,6 +40,7 @@ public class ShellExecutor {
             if (map != null) {
                 env.putAll(map);
             }
+            Logger.v(TAG, "the process builder's environment is " + env);
             StringBuilder sb = new StringBuilder();
             for (String append : args) {
                 sb.append(append);

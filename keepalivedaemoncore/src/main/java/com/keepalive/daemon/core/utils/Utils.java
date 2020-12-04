@@ -11,23 +11,29 @@ import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class Utils {
 
+    private volatile static String sProcessName = null;
+
     public static String getProcessName() {
-        BufferedReader mBufferedReader = null;
-        try {
-            File file = new File("/proc/self/cmdline");
-            mBufferedReader = new BufferedReader(new FileReader(file));
-            String value = mBufferedReader.readLine().trim();
-            Logger.v(TAG, ">>>------------------------->>> processName: " + value);
-            return value;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (mBufferedReader != null) {
-                try {
-                    mBufferedReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (sProcessName != null) {
+            return sProcessName;
+        } else {
+            BufferedReader br = null;
+            try {
+                File file = new File("/proc/self/cmdline");
+                br = new BufferedReader(new FileReader(file));
+                sProcessName = br.readLine().trim();
+                Logger.v(TAG, "!! execute [/proc/self/cmdline] >>> " + sProcessName);
+                return sProcessName;
+            } catch (Throwable th) {
+                th.printStackTrace();
+                return null;
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

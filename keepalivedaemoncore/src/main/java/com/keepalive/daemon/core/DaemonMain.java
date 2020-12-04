@@ -80,7 +80,7 @@ public class DaemonMain {
     }
 
     public void startInstrumentation() {
-        Logger.i(TAG, "!! ---> " + p3);
+        Logger.d(TAG, "!! " + p3);
         if (p3 != null) {
             try {
                 binder.transact(binderManager.startInstrumentation(), p3, null, 1);
@@ -91,7 +91,7 @@ public class DaemonMain {
     }
 
     public void broadcastIntent() {
-        Logger.i(TAG, "!! ---> " + p2);
+        Logger.d(TAG, "!! " + p2);
         if (p2 != null) {
             try {
                 binder.transact(binderManager.broadcastIntent(), p2, null, 1);
@@ -102,7 +102,7 @@ public class DaemonMain {
     }
 
     public void startService() {
-        Logger.i(TAG, "!! ---> " + p);
+        Logger.d(TAG, "!! " + p);
         if (p != null) {
             try {
                 binder.transact(binderManager.startService(), p, null, 1);
@@ -113,7 +113,6 @@ public class DaemonMain {
     }
 
     private void assembleParcel() {
-        Logger.d(TAG, "!!");
         assembleServiceParcel();
         assembleBroadcastParcel();
         assembleInstrumentationParcel();

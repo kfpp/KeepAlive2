@@ -2,6 +2,7 @@ package com.keepalive.daemon.core;
 
 public interface Constants {
 
+    String[] PROCS = {"daemon", "assist1", "assist2"};
     String COLON_SEPARATOR = ":";
 
     // Notification

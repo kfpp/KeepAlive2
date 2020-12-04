@@ -51,7 +51,8 @@ public class NotificationUtil {
             // 用户可见的通道名称
             String channelName = context.getPackageName() + ".notification.channelName";
             // 通道的重要程度
-            if (importance < 0 || importance > 5) {
+            if (importance < NotificationManager.IMPORTANCE_NONE
+                    || importance > NotificationManager.IMPORTANCE_MAX) {
                 importance = NotificationManager.IMPORTANCE_DEFAULT;
             }
             NotificationChannel nc = new NotificationChannel(channelId, channelName, importance);
@@ -126,7 +127,7 @@ public class NotificationUtil {
     }
 
     public static void showNotification(Service service, Notification notification) {
-        Logger.i(TAG, "!! ---> " + notification);
+        Logger.i(TAG, "!! " + notification);
         try {
             service.startForeground(NOTIFICATION_ID, notification);
         } catch (Throwable th) {
