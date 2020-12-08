@@ -74,12 +74,12 @@ bool wait_file_lock(const char *lock_file_path) {
 
 void keep_alive_set_sid(JNIEnv *env, jclass jclazz) {
     pid_t old_pid = getpid();
-    LOGD("------ PID: %d, PGID: %d, SID: %d", old_pid, getpgrp(), getsid(old_pid));
+    LOGD("------ PID: %d, PPID: %d, PGID: %d, SID: %d", old_pid, getppid(), getpgrp(), getsid(old_pid));
 
     setsid();
 
     pid_t new_pid = getpid();
-    LOGD("++++++ PID: %d, PGID: %d, SID: %d", new_pid, getpgrp(), getsid(new_pid));
+    LOGD("++++++ PID: %d, PPID: %d, PGID: %d, SID: %d", new_pid, getppid(), getpgrp(), getsid(new_pid));
 }
 
 void keep_alive_wait_file_lock(JNIEnv *env, jclass jclazz, jstring path) {
