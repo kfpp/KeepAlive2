@@ -11,9 +11,9 @@
 #include "common.h"
 
 extern "C" {
-int lock_file(const char *lock_file_path) {
+int32_t lock_file(const char *lock_file_path) {
     LOGD("try to lock file >> %s <<", lock_file_path);
-    int lockFileDescriptor = open(lock_file_path, O_RDONLY);
+    int32_t lockFileDescriptor = open(lock_file_path, O_RDONLY);
     if (lockFileDescriptor == -1) {
         lockFileDescriptor = open(lock_file_path, O_CREAT,
                                   S_IRUSR | S_IXUSR | S_IRWXG | S_IWGRP | S_IRWXO | S_IXOTH);
@@ -26,7 +26,7 @@ int lock_file(const char *lock_file_path) {
     } else {
         LOGD("success to open file >> %s <<", lock_file_path);
     }
-    int lockRet = flock(lockFileDescriptor, LOCK_EX);
+    int32_t lockRet = flock(lockFileDescriptor, LOCK_EX);
 //    LOGD("flock [%s:%d] : %d", lock_file_path, lockFileDescriptor, lockRet);
     if (lockRet == -1) {
         LOGE("failed to lock file >> %s <<", lock_file_path);
@@ -39,7 +39,7 @@ int lock_file(const char *lock_file_path) {
 
 bool wait_file_lock(const char *lock_file_path) {
     LOGD("wait to lock file >> %s <<", lock_file_path);
-    int lockFileDescriptor = open(lock_file_path, O_RDONLY);
+    int32_t lockFileDescriptor = open(lock_file_path, O_RDONLY);
     if (lockFileDescriptor == -1) {
         lockFileDescriptor = open(lock_file_path, O_CREAT,
                                   S_IRUSR | S_IXUSR | S_IRWXG | S_IWGRP | S_IRWXO | S_IXOTH);
@@ -52,7 +52,7 @@ bool wait_file_lock(const char *lock_file_path) {
     }
 
     LOGD("start to wait for locking file >> %s <<", lock_file_path);
-    int retry = 0;
+    int64_t retry = 0;
     while (flock(lockFileDescriptor, LOCK_EX | LOCK_NB) != -1) {
         usleep(0x3E8u);
         LOGD("waiting for 1ms to retry %d time(s) to lock file >> %s <<", ++retry, lock_file_path);
@@ -61,7 +61,7 @@ bool wait_file_lock(const char *lock_file_path) {
 
     LOGD("retry to lock file >> %s <<", lock_file_path);
 
-    int lockRet = flock(lockFileDescriptor, LOCK_EX);
+    int32_t lockRet = flock(lockFileDescriptor, LOCK_EX);
 //    LOGD("flock [%s:%d] : %d", lock_file_path, lockFileDescriptor, lockRet);
     bool ret = lockRet != -1;
     if (ret) {
@@ -74,12 +74,14 @@ bool wait_file_lock(const char *lock_file_path) {
 
 void keep_alive_set_sid(JNIEnv *env, jclass jclazz) {
     pid_t old_pid = getpid();
-    LOGD("------ PID: %d, PPID: %d, PGID: %d, SID: %d", old_pid, getppid(), getpgrp(), getsid(old_pid));
+    LOGD("------ PID: %d, PPID: %d, PGID: %d, SID: %d", old_pid, getppid(), getpgrp(),
+         getsid(old_pid));
 
     setsid();
 
     pid_t new_pid = getpid();
-    LOGD("++++++ PID: %d, PPID: %d, PGID: %d, SID: %d", new_pid, getppid(), getpgrp(), getsid(new_pid));
+    LOGD("++++++ PID: %d, PPID: %d, PGID: %d, SID: %d", new_pid, getppid(), getpgrp(),
+         getsid(new_pid));
 }
 
 void keep_alive_wait_file_lock(JNIEnv *env, jclass jclazz, jstring path) {
@@ -100,8 +102,8 @@ static JNINativeMethod methods[] = {
         {"waitFileLock", "(Ljava/lang/String;)V", (void *) keep_alive_wait_file_lock}
 };
 
-static int registerNativeMethods(JNIEnv *env, const char *className, JNINativeMethod *gMethods,
-                                 int numMethods) {
+static int32_t registerNativeMethods(JNIEnv *env, const char *className, JNINativeMethod *gMethods,
+                                     int32_t numMethods) {
     jclass clazz = env->FindClass(className);
     if (clazz == NULL) {
         return JNI_FALSE;

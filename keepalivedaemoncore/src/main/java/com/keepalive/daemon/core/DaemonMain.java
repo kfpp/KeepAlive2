@@ -67,13 +67,13 @@ public class DaemonMain {
             for (int i = 1; i < entity.args.length; i++) {
                 futureScheduler.scheduleFuture(new DaemonRunnable(this, i), 0);
             }
-            Logger.v(TAG, "[" + entity.niceName + "] wait file lock start: " + entity.args[0]);
+            Logger.v(TAG, "[DaemonMain:" + entity.niceName + "] wait file lock start: " + entity.args[0]);
             NativeKeepAlive.waitFileLock(entity.args[0]);
-            Logger.v(TAG, "[" + entity.niceName + "] wait file lock finish");
+            Logger.v(TAG, "[DaemonMain:" + entity.niceName + "] wait file lock finish");
             startService();
             broadcastIntent();
             startInstrumentation();
-            Logger.v(TAG, "[" + entity.niceName + "] start android finish");
+            Logger.v(TAG, "[DaemonMain:" + entity.niceName + "] start android finish");
         } catch (Throwable th) {
             binderManager.thrown(th);
         }
@@ -234,13 +234,13 @@ public class DaemonMain {
 
         @Override
         public void run() {
-            Logger.v(TAG, "[Thread] wait file lock start: " + index);
+            Logger.v(TAG, "[DaemonMain] wait file lock start: " + index);
             NativeKeepAlive.waitFileLock(thiz.get().entity.args[index]);
-            Logger.v(TAG, "[Thread] wait file lock finished");
+            Logger.v(TAG, "[DaemonMain] wait file lock finish");
             thiz.get().startService();
             thiz.get().broadcastIntent();
             thiz.get().startInstrumentation();
-            Logger.v(TAG, "[Thread] start android finish");
+            Logger.v(TAG, "[DaemonMain] start android finish");
         }
     }
 }

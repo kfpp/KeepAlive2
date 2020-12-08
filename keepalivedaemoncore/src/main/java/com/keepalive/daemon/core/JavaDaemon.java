@@ -67,9 +67,9 @@ public class JavaDaemon {
                 }
             }
             if (isHitted) {
-                Logger.v(TAG, "app lock file start: " + proc);
+                Logger.v(TAG, "[JavaDaemon] file lock start: " + proc);
                 NativeKeepAlive.lockFile(context.getFilesDir() + "/" + proc + "_daemon");
-                Logger.v(TAG, "app lock file finish");
+                Logger.v(TAG, "[JavaDaemon] file lock finish");
                 String[] strArr = new String[list.size()];
                 for (int i = 0; i < strArr.length; i++) {
                     strArr[i] = context.getFilesDir() + "/" + list.get(i) + "_daemon";
