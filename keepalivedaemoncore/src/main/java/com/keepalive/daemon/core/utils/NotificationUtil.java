@@ -67,8 +67,6 @@ public class NotificationUtil {
         // 设置通知小图标
         if (smallIconId == 0) {
             builder.setSmallIcon(R.drawable.noti_icon);
-//            Logger.w(Logger.TAG, "Oops!!! Invalid notification small smallIconId.");
-//            return null;
         } else {
             builder.setSmallIcon(smallIconId);
         }
@@ -127,7 +125,7 @@ public class NotificationUtil {
     }
 
     public static void showNotification(Service service, Notification notification) {
-        Logger.i(TAG, "!! " + notification);
+        Logger.d(TAG, "!! " + notification);
         try {
             service.startForeground(NOTIFICATION_ID, notification);
         } catch (Throwable th) {

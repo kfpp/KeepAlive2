@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-#define TAG        "keepalive2-daemon-native"
+#define TAG        "keepalive2-native"
 #define LOGW(...)    __android_log_print(ANDROID_LOG_WARN, TAG, __VA_ARGS__)
 #define LOGE(...)    __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__)
 
@@ -28,6 +28,4 @@
 
 #define JAVA_CLASS "com/keepalive/daemon/core/NativeKeepAlive"
 
-typedef unsigned short Char16;
-typedef unsigned int Char32;
 #endif //KEEPALIVE_COMMON_H

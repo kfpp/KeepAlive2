@@ -20,13 +20,12 @@ import static android.util.Log.WARN;
 
 public class Logger {
 
-    private static final boolean GLOBAL_TAG = true;
-
-    public static final String TAG = "keepalive2-daemon";
-    public static final boolean DEBUGABLE = BuildConfig.DEBUG;
+    private static final boolean PRIVATE_TAG = true;
+    public static final String TAG = "keepalive2-" + BuildConfig.VERSION_NAME;
+    public static final boolean DEBUGGABLE = BuildConfig.DEBUG;
 
     private static boolean isLoggable(String tag, int level) {
-        return DEBUGABLE || Log.isLoggable(tag, level);
+        return DEBUGGABLE || Log.isLoggable(tag, level);
     }
 
     public static void d(String tag, String message) {
@@ -78,7 +77,7 @@ public class Logger {
     }
 
     private static boolean privateTag() {
-        return GLOBAL_TAG;
+        return PRIVATE_TAG;
     }
 
     @SuppressLint("DefaultLocale")
