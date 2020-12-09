@@ -14,13 +14,13 @@ public class DaemonInstrumentation extends Instrumentation {
     @Override
     public void callApplicationOnCreate(Application application) {
         super.callApplicationOnCreate(application);
-        Logger.v(TAG, "callApplicationOnCreate");
+        Logger.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     }
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        Logger.v(TAG, "onCreate");
+        Logger.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         ServiceHolder.fireService(getTargetContext(), DaemonService.class, false);
     }
 }

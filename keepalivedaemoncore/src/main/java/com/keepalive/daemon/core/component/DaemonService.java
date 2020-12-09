@@ -21,6 +21,7 @@ public class DaemonService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Logger.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         try {
             ContextCompat.startForegroundService(this,
                     new Intent().setClassName(getPackageName(), NotifyResidentService.class.getName()));

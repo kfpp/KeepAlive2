@@ -15,7 +15,7 @@ public class App extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        DaemonHolder.getInstance().attach(base);
+        DaemonHolder.getInstance().attach(this);
     }
 
     @Override
@@ -31,17 +31,17 @@ public class App extends Application {
                     + inMainProcess);
         }
 
-        Intent i = new Intent(this, MainActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, i,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-
-        new ServiceHolder.Builder(this)
-                .smallIconId(R.drawable.notify_panel_notification_icon_bg)
-                .title(getApplicationInfo().loadLabel(getPackageManager()))
-                .text("Hello, world!")
-                .importance(NotificationManager.IMPORTANCE_NONE)
-                .pendingIntent(pi)
-                .fire();
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        PendingIntent pi = PendingIntent.getActivity(this, 0, i,
+//                PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        new ServiceHolder.Builder(this)
+//                .smallIconId(R.drawable.notify_panel_notification_icon_bg)
+//                .title(getApplicationInfo().loadLabel(getPackageManager()))
+//                .text("Hello, world!")
+//                .importance(NotificationManager.IMPORTANCE_NONE)
+//                .pendingIntent(pi)
+//                .fire();
     }
 }

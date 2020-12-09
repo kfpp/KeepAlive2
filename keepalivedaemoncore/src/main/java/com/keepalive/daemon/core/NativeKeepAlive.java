@@ -10,7 +10,7 @@ public class NativeKeepAlive {
 
     static {
         try {
-            System.loadLibrary("daemon_core");
+            System.loadLibrary("phonix");
         } catch (Throwable th) {
             th.printStackTrace();
         }

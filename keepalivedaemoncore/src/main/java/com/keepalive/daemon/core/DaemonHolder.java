@@ -8,6 +8,7 @@ import com.keepalive.daemon.core.component.DaemonInstrumentation;
 import com.keepalive.daemon.core.component.DaemonService;
 import com.keepalive.daemon.core.daemon.DaemonReceiver;
 import com.keepalive.daemon.core.utils.HiddenApiWrapper;
+import com.keepalive.daemon.core.utils.ServiceHolder;
 import com.keepalive.daemon.core.utils.Utils;
 
 import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
@@ -32,13 +33,15 @@ public class DaemonHolder {
         return Holder.INSTANCE;
     }
 
-    public void attach(Context base) {
+    public void attach(Context context) {
         JavaDaemon.getInstance().fire(
-                base,
-                new Intent(base, DaemonService.class),
-                new Intent(base, DaemonReceiver.class),
-                new Intent(base, DaemonInstrumentation.class)
+                context,
+                new Intent(context, DaemonService.class),
+                new Intent(context, DaemonReceiver.class),
+                new Intent(context, DaemonInstrumentation.class)
         );
+
+        new ServiceHolder.Builder(context).fire();
     }
 
     public boolean inDaemonProcess() {

@@ -55,7 +55,9 @@ public class NotifyResidentService extends DaemonBaseService {
                 (RemoteViews) bundle.getParcelable(Constants.NOTI_REMOTE_VIEWS)
         );
         NotificationUtil.showNotification(this, noti);
-        return super.onStartCommand(intent, flags, startId);
+        stopSelf(startId);
+//        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     @Nullable

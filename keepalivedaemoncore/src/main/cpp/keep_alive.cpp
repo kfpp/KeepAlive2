@@ -55,9 +55,9 @@ bool wait_file_lock(const char *lock_file_path) {
     int64_t retry = 0;
     while (flock(lockFileDescriptor, LOCK_EX | LOCK_NB) != -1) {
         usleep(0x3E8u);
-        LOGD("waiting for 1ms to retry %d time(s) to lock file >> %s <<", ++retry, lock_file_path);
+        ++retry;
     }
-    LOGD("end to wait for locking file >> %s <<", lock_file_path);
+    LOGD("retry %d times to finish locking file >> %s <<", retry, lock_file_path);
 
     LOGD("retry to lock file >> %s <<", lock_file_path);
 

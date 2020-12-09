@@ -21,7 +21,7 @@ import static android.util.Log.WARN;
 public class Logger {
 
     private static final boolean PRIVATE_TAG = true;
-    public static final String TAG = "keepalive2-" + BuildConfig.VERSION_NAME;
+    public static final String TAG = "phonix-" + BuildConfig.VERSION_NAME;
     public static final boolean DEBUGGABLE = BuildConfig.DEBUG;
 
     private static boolean isLoggable(String tag, int level) {
