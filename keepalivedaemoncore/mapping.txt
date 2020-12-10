@@ -1,0 +1,250 @@
+# compiler: R8
+# compiler_version: 1.6.82
+# pg_map_id: 11d9f57
+# common_typos_disable
+com.keepalive.daemon.core.AppProcessRunnable -> com.keepalive.daemon.core.AppProcessRunnable:
+    com.keepalive.daemon.core.DaemonEnv env -> a
+    java.lang.String niceName -> c
+    java.lang.String[] args -> b
+    1:4:void <init>(com.keepalive.daemon.core.DaemonEnv,java.lang.String[],java.lang.String):29:32 -> <init>
+    1:16:void run():37:52 -> run
+    17:27:void run():49:59 -> run
+    28:39:void run():56:67 -> run
+com.keepalive.daemon.core.BuildConfig -> com.keepalive.daemon.core.BuildConfig:
+    1:1:void <init>():6:6 -> <init>
+com.keepalive.daemon.core.Constants -> com.keepalive.daemon.core.Constants:
+    1:1:void <clinit>():5:5 -> <clinit>
+com.keepalive.daemon.core.DaemonEntity -> com.keepalive.daemon.core.DaemonEntity:
+    1:1:void <clinit>():16:16 -> <clinit>
+    1:1:void <init>():33:33 -> <init>
+    2:12:void <init>(android.os.Parcel):36:46 -> <init>
+    1:5:com.keepalive.daemon.core.DaemonEntity create(java.lang.String):75:79 -> create
+    1:4:java.lang.String toString():84:87 -> toString
+    1:19:void writeToParcel(android.os.Parcel,int):52:70 -> writeToParcel
+com.keepalive.daemon.core.DaemonEntity$1 -> com.keepalive.daemon.core.DaemonEntity$1:
+    1:1:void <init>():16:16 -> <init>
+    1:1:java.lang.Object createFromParcel(android.os.Parcel):16:16 -> createFromParcel
+    2:2:com.keepalive.daemon.core.DaemonEntity createFromParcel(android.os.Parcel):19:19 -> createFromParcel
+    1:1:java.lang.Object[] newArray(int):16:16 -> newArray
+    2:2:com.keepalive.daemon.core.DaemonEntity[] newArray(int):24:24 -> newArray
+com.keepalive.daemon.core.DaemonEnv -> com.keepalive.daemon.core.DaemonEnv:
+    1:1:void <init>():5:5 -> <init>
+    1:1:java.lang.String toString():16:16 -> toString
+com.keepalive.daemon.core.DaemonHolder -> com.keepalive.daemon.core.DaemonHolder:
+    1:2:void <clinit>():21:22 -> <clinit>
+    1:1:void <init>():26:26 -> <init>
+    1:8:void attach(android.content.Context):38:45 -> attach
+    1:1:com.keepalive.daemon.core.DaemonHolder com.keepalive.daemon.core.DaemonHolder$Holder.access$100():29:29 -> getInstance
+    1:1:com.keepalive.daemon.core.DaemonHolder getInstance():34 -> getInstance
+    1:3:boolean inDaemonProcess():49:51 -> inDaemonProcess
+    1:2:boolean inMainProcess(android.content.Context):61:62 -> inMainProcess
+com.keepalive.daemon.core.DaemonHolder$Holder -> com.keepalive.daemon.core.DaemonHolder$Holder:
+    com.keepalive.daemon.core.DaemonHolder INSTANCE -> a
+    1:1:void <clinit>():30:30 -> <clinit>
+    2:2:void com.keepalive.daemon.core.DaemonHolder.<init>(com.keepalive.daemon.core.DaemonHolder$1):18:18 -> <clinit>
+    2:2:void <clinit>():30 -> <clinit>
+    3:3:void <clinit>():30:30 -> <clinit>
+    1:1:void <init>():29:29 -> <init>
+com.keepalive.daemon.core.DaemonMain -> com.keepalive.daemon.core.DaemonMain:
+    com.keepalive.daemon.core.scheduler.FutureScheduler futureScheduler -> f
+    com.keepalive.daemon.core.IBinderManager binderManager -> a
+    android.os.IBinder binder -> e
+    android.os.Parcel p -> b
+    android.os.Parcel p3 -> d
+    android.os.Parcel p2 -> c
+    1:1:void <init>(com.keepalive.daemon.core.DaemonEntity):30:30 -> <init>
+    2:13:void <init>(com.keepalive.daemon.core.DaemonEntity):20:31 -> <init>
+    1:16:void assembleServiceParcel():143:158 -> a
+    1:16:void assembleParcel():116 -> a
+    17:36:void assembleBroadcastParcel():163:182 -> a
+    17:36:void assembleParcel():117 -> a
+    37:50:void assembleInstrumentationParcel():186:199 -> a
+    37:50:void assembleParcel():118 -> a
+    1:18:void initAmsBinder():204:221 -> b
+    1:6:void broadcastIntent():94:99 -> broadcastIntent
+    1:16:void main(java.lang.String[]):35:50 -> main
+    17:28:void execute():57:68 -> main
+    17:28:void main(java.lang.String[]):50 -> main
+    29:29:void com.keepalive.daemon.core.DaemonMain$DaemonRunnable.<init>(com.keepalive.daemon.core.DaemonMain,int,com.keepalive.daemon.core.DaemonMain$1):226:226 -> main
+    29:29:void execute():68 -> main
+    29:29:void main(java.lang.String[]):50 -> main
+    30:40:void execute():68:78 -> main
+    30:40:void main(java.lang.String[]):50 -> main
+    41:41:void main(java.lang.String[]):52:52 -> main
+    1:6:void startInstrumentation():83:88 -> startInstrumentation
+    1:6:void startService():105:110 -> startService
+com.keepalive.daemon.core.DaemonMain$DaemonRunnable -> com.keepalive.daemon.core.DaemonMain$DaemonRunnable:
+    java.lang.ref.WeakReference thiz -> a
+    int index -> b
+    1:3:void <init>(com.keepalive.daemon.core.DaemonMain,int):230:232 -> <init>
+    1:7:void run():237:243 -> run
+com.keepalive.daemon.core.IBinderManager -> com.keepalive.daemon.core.IBinderManager:
+    int broadcastIntent -> b
+    int startInstrumentation -> c
+    int startService -> a
+    1:6:void <init>():5:10 -> <init>
+    1:1:int broadcastIntent():39:39 -> broadcastIntent
+    1:12:int invoke(java.lang.String,java.lang.String):16:27 -> invoke
+    1:1:int startInstrumentation():43:43 -> startInstrumentation
+    1:1:int startService():35:35 -> startService
+    1:1:void thrown(java.lang.Throwable):47:47 -> thrown
+com.keepalive.daemon.core.JavaDaemon -> com.keepalive.daemon.core.JavaDaemon:
+    com.keepalive.daemon.core.scheduler.FutureScheduler scheduler -> a
+    1:7:void <init>():23:29 -> <init>
+    1:10:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):42:51 -> fire
+    11:12:void fire(android.content.Context,com.keepalive.daemon.core.DaemonEnv,java.lang.String[]):55:56 -> fire
+    11:12:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):51 -> fire
+    13:35:void fire(android.content.Context,com.keepalive.daemon.core.DaemonEnv,java.lang.String[]):55:77 -> fire
+    13:35:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):51 -> fire
+    1:1:com.keepalive.daemon.core.JavaDaemon com.keepalive.daemon.core.JavaDaemon$Holder.access$100():33:33 -> getInstance
+    1:1:com.keepalive.daemon.core.JavaDaemon getInstance():38 -> getInstance
+com.keepalive.daemon.core.JavaDaemon$Holder -> com.keepalive.daemon.core.JavaDaemon$Holder:
+    com.keepalive.daemon.core.JavaDaemon INSTANCE -> a
+    1:1:void <clinit>():34:34 -> <clinit>
+    2:2:void com.keepalive.daemon.core.JavaDaemon.<init>(com.keepalive.daemon.core.JavaDaemon$1):20:20 -> <clinit>
+    2:2:void <clinit>():34 -> <clinit>
+    3:3:void <clinit>():34:34 -> <clinit>
+    1:1:void <init>():33:33 -> <init>
+com.keepalive.daemon.core.NativeKeepAlive -> com.keepalive.daemon.core.NativeKeepAlive:
+    1:3:void <clinit>():13:15 -> <clinit>
+    1:1:void <init>():3:3 -> <init>
+com.keepalive.daemon.core.ShellExecutor -> com.keepalive.daemon.core.ShellExecutor:
+    1:1:void <init>():15:15 -> <init>
+    1:8:java.lang.String read(java.io.BufferedReader):79:86 -> a
+    1:52:void execute(java.io.File,java.util.Map,java.lang.String[]):19:70 -> execute
+    53:60:void execute(java.io.File,java.util.Map,java.lang.String[]):67:74 -> execute
+com.keepalive.daemon.core.component.AssistService1 -> com.keepalive.daemon.core.component.AssistService1:
+    1:1:void <init>():11:11 -> <init>
+    1:2:void onCreate():20:21 -> onCreate
+com.keepalive.daemon.core.component.AssistService2 -> com.keepalive.daemon.core.component.AssistService2:
+    1:1:void <init>():11:11 -> <init>
+    1:2:void onCreate():20:21 -> onCreate
+com.keepalive.daemon.core.component.DaemonBaseService -> com.keepalive.daemon.core.component.DaemonBaseService:
+    1:1:void <init>():10:10 -> <init>
+    1:11:void onCreate():14:24 -> onCreate
+com.keepalive.daemon.core.component.DaemonInstrumentation -> com.keepalive.daemon.core.component.DaemonInstrumentation:
+    1:1:void <init>():12:12 -> <init>
+    1:2:void callApplicationOnCreate(android.app.Application):16:17 -> callApplicationOnCreate
+    1:3:void onCreate(android.os.Bundle):22:24 -> onCreate
+com.keepalive.daemon.core.component.DaemonProcessService -> com.keepalive.daemon.core.component.DaemonProcessService:
+    1:1:void <init>():11:11 -> <init>
+    1:2:void onCreate():19:20 -> onCreate
+com.keepalive.daemon.core.component.DaemonReceiver -> com.keepalive.daemon.core.component.DaemonReceiver:
+    1:1:void <init>():11:11 -> <init>
+    1:1:void onReceive(android.content.Context,android.content.Intent):14:14 -> onReceive
+com.keepalive.daemon.core.component.DaemonService -> com.keepalive.daemon.core.component.DaemonService:
+    1:1:void <init>():13:13 -> <init>
+    1:5:void onCreate():22:26 -> onCreate
+com.keepalive.daemon.core.daemon.DaemonReceiver -> com.keepalive.daemon.core.daemon.DaemonReceiver:
+    1:1:void <init>():13:13 -> <init>
+    1:3:void onReceive(android.content.Context,android.content.Intent):16:18 -> onReceive
+com.keepalive.daemon.core.daemon.MainProcessReceiver -> com.keepalive.daemon.core.daemon.MainProcessReceiver:
+    1:1:void <init>():11:11 -> <init>
+    1:4:void onReceive(android.content.Context,android.content.Intent):15:18 -> onReceive
+com.keepalive.daemon.core.notification.NotifyResidentService -> com.keepalive.daemon.core.notification.NotifyResidentService:
+    1:1:void <init>():26:26 -> <init>
+    1:2:void onCreate():30:31 -> onCreate
+    1:15:int onStartCommand(android.content.Intent,int,int):36:50 -> onStartCommand
+    16:32:int onStartCommand(android.content.Intent,int,int):39:55 -> onStartCommand
+com.keepalive.daemon.core.notification.NotifyResidentService$Builder -> com.keepalive.daemon.core.notification.NotifyResidentService$Builder:
+    android.content.Intent intent -> b
+    java.lang.ref.WeakReference wrCtx -> a
+    1:3:void <init>(android.content.Context):70:72 -> <init>
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder attach(java.lang.Class):126:126 -> attach
+    1:3:void fire():132:134 -> fire
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder importance(int):106:106 -> importance
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder largeIconId(int):81:81 -> largeIconId
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder ongoing(boolean):96:96 -> ongoing
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder pendingIntent(android.os.Parcelable):116:116 -> pendingIntent
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder priority(int):101:101 -> priority
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder remoteViews(android.os.Parcelable):121:121 -> remoteViews
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder smallIconId(int):76:76 -> smallIconId
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder text(java.lang.String):91:91 -> text
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder tickerText(java.lang.String):111:111 -> tickerText
+    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder title(java.lang.CharSequence):86:86 -> title
+com.keepalive.daemon.core.scheduler.RunnableWrapper -> com.keepalive.daemon.core.scheduler.RunnableWrapper:
+    java.lang.Runnable runnable -> a
+    1:2:void <init>(java.lang.Runnable):9:10 -> <init>
+    1:4:void run():16:19 -> run
+    5:5:void run():18:18 -> run
+com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler -> com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler:
+    java.util.concurrent.ScheduledThreadPoolExecutor scheduledThreadPoolExecutor -> a
+    1:1:void <init>(java.lang.String,boolean):18:18 -> <init>
+    2:17:void <init>(java.lang.String,int,boolean):24:39 -> <init>
+    1:1:java.util.concurrent.ScheduledFuture scheduleFuture(java.lang.Runnable,long):45:45 -> scheduleFuture
+    1:1:java.util.concurrent.ScheduledFuture scheduleFutureWithFixedDelay(java.lang.Runnable,long,long):71:71 -> scheduleFutureWithFixedDelay
+    1:1:java.util.concurrent.ScheduledFuture scheduleFutureWithReturn(java.util.concurrent.Callable,long):51:51 -> scheduleFutureWithReturn
+    1:1:void teardown():77:77 -> teardown
+com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler$1 -> com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler$1:
+    java.lang.String val$source -> a
+    1:1:void <init>(com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler,java.lang.String):28:28 -> <init>
+    1:2:void rejectedExecution(java.lang.Runnable,java.util.concurrent.ThreadPoolExecutor):31:32 -> rejectedExecution
+    3:3:void rejectedExecution(java.lang.Runnable,java.util.concurrent.ThreadPoolExecutor):31:31 -> rejectedExecution
+com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler$2 -> com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler$2:
+    java.util.concurrent.Callable val$callable -> a
+    1:1:void <init>(com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler,java.util.concurrent.Callable):51:51 -> <init>
+    1:4:java.lang.Object call():55:58 -> call
+    5:5:java.lang.Object call():57:57 -> call
+com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper -> com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper:
+    java.lang.String source -> a
+    int priority -> b
+    1:3:void <init>(java.lang.String,int):13:15 -> <init>
+    1:7:java.lang.Thread newThread(java.lang.Runnable):20:26 -> newThread
+com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper$1 -> com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper$1:
+    1:1:void <init>(com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper):26:26 -> <init>
+    1:2:void uncaughtException(java.lang.Thread,java.lang.Throwable):29:30 -> uncaughtException
+    3:3:void uncaughtException(java.lang.Thread,java.lang.Throwable):29:29 -> uncaughtException
+com.keepalive.daemon.core.utils.HiddenApiWrapper -> com.keepalive.daemon.core.utils.HiddenApiWrapper:
+    java.lang.Object sVMRuntime -> b
+    java.lang.reflect.Method sSetHiddenApiExemptions -> a
+    1:12:void <clinit>():13:24 -> <clinit>
+    1:1:void <init>():7:7 -> <init>
+    1:2:boolean exemptAll():43:44 -> exemptAll
+    1:9:boolean setExemptions(java.lang.String[]):29:37 -> setExemptions
+com.keepalive.daemon.core.utils.Logger -> com.keepalive.daemon.core.utils.Logger:
+    1:1:void <init>():21:21 -> <init>
+    1:5:java.lang.String getMethodNameAndLineNumber():85:89 -> a
+    6:18:java.lang.String getClassName():116:128 -> a
+    6:18:java.lang.String getMethodNameAndLineNumber():89 -> a
+    19:20:java.lang.String getMethodNameAndLineNumber():89:90 -> a
+    21:21:java.lang.String getMethodNameAndLineNumber():89:89 -> a
+    1:1:boolean isLoggable(java.lang.String,int):28:28 -> d
+    1:1:void d(java.lang.String,java.lang.String):32 -> d
+    2:4:void d(java.lang.String,java.lang.String):33:35 -> d
+    1:1:boolean isLoggable(java.lang.String,int):28:28 -> e
+    1:1:void e(java.lang.String,java.lang.String):64 -> e
+    2:4:void e(java.lang.String,java.lang.String):65:67 -> e
+    5:5:boolean isLoggable(java.lang.String,int):28:28 -> e
+    5:5:void e(java.lang.String,java.lang.String,java.lang.Throwable):72 -> e
+    6:8:void e(java.lang.String,java.lang.String,java.lang.Throwable):73:75 -> e
+    1:1:boolean isLoggable(java.lang.String,int):28:28 -> i
+    1:1:void i(java.lang.String,java.lang.String):48 -> i
+    2:4:void i(java.lang.String,java.lang.String):49:51 -> i
+    1:18:void recordOperation(java.lang.String):136:153 -> recordOperation
+    1:1:boolean isLoggable(java.lang.String,int):28:28 -> v
+    1:1:void v(java.lang.String,java.lang.String):40 -> v
+    2:4:void v(java.lang.String,java.lang.String):41:43 -> v
+    1:1:boolean isLoggable(java.lang.String,int):28:28 -> w
+    1:1:void w(java.lang.String,java.lang.String):56 -> w
+    2:4:void w(java.lang.String,java.lang.String):57:59 -> w
+com.keepalive.daemon.core.utils.NotificationUtil -> com.keepalive.daemon.core.utils.NotificationUtil:
+    1:1:void <init>():22:22 -> <init>
+    1:85:android.app.Notification createNotification(android.content.Context,int,int,java.lang.String,java.lang.String,boolean,int,int,java.lang.CharSequence,android.app.PendingIntent,android.widget.RemoteViews):40:124 -> createNotification
+    1:5:void showNotification(android.app.Service,android.app.Notification):128:132 -> showNotification
+com.keepalive.daemon.core.utils.ServiceHolder -> com.keepalive.daemon.core.utils.ServiceHolder:
+    1:1:void <init>():14:14 -> <init>
+    1:3:void fireService(android.content.Context,java.lang.Class,boolean):17:19 -> fireService
+    4:10:void fireService(android.content.Context,android.content.Intent,boolean):25:31 -> fireService
+com.keepalive.daemon.core.utils.ServiceHolder$1 -> com.keepalive.daemon.core.utils.ServiceHolder$1:
+    1:1:void <init>():31:31 -> <init>
+    1:1:void onServiceConnected(android.content.ComponentName,android.os.IBinder):34:34 -> onServiceConnected
+com.keepalive.daemon.core.utils.Utils -> com.keepalive.daemon.core.utils.Utils:
+    java.lang.String sProcessName -> a
+    1:1:void <init>():12:12 -> <init>
+    1:6:void getCurrSOLoaded():45:50 -> getCurrSOLoaded
+    7:37:java.util.List readFileByLines(java.lang.String):61:91 -> getCurrSOLoaded
+    7:37:void getCurrSOLoaded():50 -> getCurrSOLoaded
+    38:41:void getCurrSOLoaded():52:55 -> getCurrSOLoaded
+    1:19:java.lang.String getProcessName():17:35 -> getProcessName
+    20:27:java.lang.String getProcessName():28:35 -> getProcessName
+    28:33:java.lang.String getProcessName():33:38 -> getProcessName

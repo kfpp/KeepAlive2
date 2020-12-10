@@ -31,6 +31,8 @@ public class App extends Application {
                     Toast.makeText(this, "我胡汉山又回来啦，啊哈哈哈哈~~~~", Toast.LENGTH_LONG).show();
                 }
             }
+        } else {
+            return;
         }
     }
 }
