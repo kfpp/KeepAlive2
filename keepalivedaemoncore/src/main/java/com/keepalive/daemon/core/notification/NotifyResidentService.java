@@ -3,9 +3,10 @@ package com.keepalive.daemon.core.notification;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Parcelable;
 import android.widget.RemoteViews;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,9 @@ import com.keepalive.daemon.core.component.DaemonBaseService;
 import com.keepalive.daemon.core.daemon.MainProcessReceiver;
 import com.keepalive.daemon.core.utils.Logger;
 import com.keepalive.daemon.core.utils.NotificationUtil;
+import com.keepalive.daemon.core.utils.ServiceHolder;
+
+import java.lang.ref.WeakReference;
 
 import static com.keepalive.daemon.core.utils.Logger.TAG;
 
@@ -25,8 +29,6 @@ public class NotifyResidentService extends DaemonBaseService {
     public final void onCreate() {
         super.onCreate();
         sendBroadcast(new Intent(this, MainProcessReceiver.class));
-        doStart();
-//        stopSelf();
     }
 
     @Override
@@ -34,29 +36,24 @@ public class NotifyResidentService extends DaemonBaseService {
         Logger.d(TAG, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " +
                 "intent: " + intent + ", startId: " + startId);
 
-        doStartCommand(intent, flags, startId);
-
-        Bundle bundle = intent.getBundleExtra("noti_data");
-        if (bundle == null) {
-            Logger.w(TAG, "Oops!!! The notification bundle data is empty.");
-            return super.onStartCommand(intent, flags, startId);
-        }
         Notification noti = NotificationUtil.createNotification(
                 this,
-                bundle.getInt(Constants.NOTI_SMALL_ICON_ID, 0),
-                bundle.getInt(Constants.NOTI_LARGE_ICON_ID, 0),
-                bundle.getString(Constants.NOTI_TITLE),
-                bundle.getString(Constants.NOTI_TEXT),
-                bundle.getBoolean(Constants.NOTI_ONGOING, true),
-                bundle.getInt(Constants.NOTI_PRIORITY, NotificationCompat.PRIORITY_DEFAULT),
-                bundle.getInt(Constants.NOTI_IMPORTANCE, NotificationManager.IMPORTANCE_DEFAULT),
-                bundle.getString(Constants.NOTI_TICKER_TEXT),
-                (PendingIntent) bundle.getParcelable(Constants.NOTI_PENDING_INTENT),
-                (RemoteViews) bundle.getParcelable(Constants.NOTI_REMOTE_VIEWS)
+                intent.getIntExtra(Constants.NOTI_SMALL_ICON_ID, 0),
+                intent.getIntExtra(Constants.NOTI_LARGE_ICON_ID, 0),
+                intent.getStringExtra(Constants.NOTI_TITLE),
+                intent.getStringExtra(Constants.NOTI_TEXT),
+                intent.getBooleanExtra(Constants.NOTI_ONGOING, true),
+                intent.getIntExtra(Constants.NOTI_PRIORITY, NotificationCompat.PRIORITY_DEFAULT),
+                intent.getIntExtra(Constants.NOTI_IMPORTANCE, NotificationManager.IMPORTANCE_DEFAULT),
+                intent.getStringExtra(Constants.NOTI_TICKER_TEXT),
+                (PendingIntent) intent.getParcelableExtra(Constants.NOTI_PENDING_INTENT),
+                (RemoteViews) intent.getParcelableExtra(Constants.NOTI_REMOTE_VIEWS)
         );
+
         NotificationUtil.showNotification(this, noti);
+
         stopSelf(startId);
-//        return super.onStartCommand(intent, flags, startId);
+
         return START_NOT_STICKY;
     }
 
@@ -66,18 +63,76 @@ public class NotifyResidentService extends DaemonBaseService {
         return null;
     }
 
-    @Override
-    public final void onDestroy() {
-        doRelease();
-        super.onDestroy();
-    }
+    public static class Builder {
+        private WeakReference<Context> wrCtx;
+        private Intent intent;
 
-    protected void doStart() {
-    }
+        public Builder(Context context) {
+            wrCtx = new WeakReference<>(context);
+            intent = new Intent(context, NotifyResidentService.class);
+        }
 
-    protected void doStartCommand(Intent intent, int flags, int startId) {
-    }
+        public Builder smallIconId(int iconId) {
+            intent.putExtra(Constants.NOTI_SMALL_ICON_ID, iconId);
+            return this;
+        }
 
-    protected void doRelease() {
+        public Builder largeIconId(int iconId) {
+            intent.putExtra(Constants.NOTI_LARGE_ICON_ID, iconId);
+            return this;
+        }
+
+        public Builder title(CharSequence title) {
+            intent.putExtra(Constants.NOTI_TITLE, title);
+            return this;
+        }
+
+        public Builder text(String text) {
+            intent.putExtra(Constants.NOTI_TEXT, text);
+            return this;
+        }
+
+        public Builder ongoing(boolean ongoing) {
+            intent.putExtra(Constants.NOTI_ONGOING, ongoing);
+            return this;
+        }
+
+        public Builder priority(int priority) {
+            intent.putExtra(Constants.NOTI_PRIORITY, priority);
+            return this;
+        }
+
+        public Builder importance(int importance) {
+            intent.putExtra(Constants.NOTI_IMPORTANCE, importance);
+            return this;
+        }
+
+        public Builder tickerText(String tickerText) {
+            intent.putExtra(Constants.NOTI_TICKER_TEXT, tickerText);
+            return this;
+        }
+
+        public Builder pendingIntent(Parcelable pendingIntent) {
+            intent.putExtra(Constants.NOTI_PENDING_INTENT, pendingIntent);
+            return this;
+        }
+
+        public Builder remoteViews(Parcelable remoteViews) {
+            intent.putExtra(Constants.NOTI_REMOTE_VIEWS, remoteViews);
+            return this;
+        }
+
+        public Builder attach(Class<? extends NotifyResidentService> serviceClass) {
+            intent.setClass(wrCtx.get(), serviceClass);
+            return this;
+        }
+
+        public void fire() {
+            try {
+                ServiceHolder.fireService(wrCtx.get(), intent, true);
+            } catch (Throwable th) {
+                Logger.e(TAG, "Failed to start service: " + th.getMessage());
+            }
+        }
     }
 }

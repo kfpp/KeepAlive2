@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.sogou.MyService" />
     </application>
 
 </manifest>

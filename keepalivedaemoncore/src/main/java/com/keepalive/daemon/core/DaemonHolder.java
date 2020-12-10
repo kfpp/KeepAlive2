@@ -7,6 +7,7 @@ import android.os.Build;
 import com.keepalive.daemon.core.component.DaemonInstrumentation;
 import com.keepalive.daemon.core.component.DaemonService;
 import com.keepalive.daemon.core.daemon.DaemonReceiver;
+import com.keepalive.daemon.core.notification.NotifyResidentService;
 import com.keepalive.daemon.core.utils.HiddenApiWrapper;
 import com.keepalive.daemon.core.utils.ServiceHolder;
 import com.keepalive.daemon.core.utils.Utils;
@@ -41,7 +42,7 @@ public class DaemonHolder {
                 new Intent(context, DaemonInstrumentation.class)
         );
 
-        new ServiceHolder.Builder(context).fire();
+        ServiceHolder.fireService(context, NotifyResidentService.class, true);
     }
 
     public boolean inDaemonProcess() {
