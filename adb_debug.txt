@@ -1,6 +1,7 @@
 adb shell:
 logcat | egrep " Zygote | AndroidRuntime: | DEBUG|phonix-|binder| ActivityManager:|ANR|logbridge"
 
+ps -A | egrep "init|zygote|phonix"
 ps -A | egrep "init|zygote|u0_axxx"
 
 while true^Jdo^Jps -A | egrep "init|zygote|u0_axxx|app_process"^Jecho ""^Jsleep 1^Jdone
