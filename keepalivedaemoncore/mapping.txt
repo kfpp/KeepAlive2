@@ -1,6 +1,6 @@
 # compiler: R8
 # compiler_version: 1.6.82
-# pg_map_id: 11d9f57
+# pg_map_id: 209a14a
 # common_typos_disable
 com.keepalive.daemon.core.AppProcessRunnable -> com.keepalive.daemon.core.AppProcessRunnable:
     com.keepalive.daemon.core.DaemonEnv env -> a
@@ -203,30 +203,30 @@ com.keepalive.daemon.core.utils.HiddenApiWrapper -> com.keepalive.daemon.core.ut
     1:9:boolean setExemptions(java.lang.String[]):29:37 -> setExemptions
 com.keepalive.daemon.core.utils.Logger -> com.keepalive.daemon.core.utils.Logger:
     1:1:void <init>():21:21 -> <init>
-    1:5:java.lang.String getMethodNameAndLineNumber():85:89 -> a
-    6:18:java.lang.String getClassName():116:128 -> a
-    6:18:java.lang.String getMethodNameAndLineNumber():89 -> a
-    19:20:java.lang.String getMethodNameAndLineNumber():89:90 -> a
-    21:21:java.lang.String getMethodNameAndLineNumber():89:89 -> a
-    1:1:boolean isLoggable(java.lang.String,int):28:28 -> d
+    1:5:java.lang.String getMethodNameAndLineNumber():90:94 -> a
+    6:18:java.lang.String getClassName():121:133 -> a
+    6:18:java.lang.String getMethodNameAndLineNumber():94 -> a
+    19:20:java.lang.String getMethodNameAndLineNumber():94:95 -> a
+    21:21:java.lang.String getMethodNameAndLineNumber():94:94 -> a
+    1:1:boolean isLoggable(int):27:27 -> d
     1:1:void d(java.lang.String,java.lang.String):32 -> d
     2:4:void d(java.lang.String,java.lang.String):33:35 -> d
-    1:1:boolean isLoggable(java.lang.String,int):28:28 -> e
-    1:1:void e(java.lang.String,java.lang.String):64 -> e
-    2:4:void e(java.lang.String,java.lang.String):65:67 -> e
-    5:5:boolean isLoggable(java.lang.String,int):28:28 -> e
-    5:5:void e(java.lang.String,java.lang.String,java.lang.Throwable):72 -> e
-    6:8:void e(java.lang.String,java.lang.String,java.lang.Throwable):73:75 -> e
-    1:1:boolean isLoggable(java.lang.String,int):28:28 -> i
-    1:1:void i(java.lang.String,java.lang.String):48 -> i
-    2:4:void i(java.lang.String,java.lang.String):49:51 -> i
-    1:18:void recordOperation(java.lang.String):136:153 -> recordOperation
-    1:1:boolean isLoggable(java.lang.String,int):28:28 -> v
-    1:1:void v(java.lang.String,java.lang.String):40 -> v
-    2:4:void v(java.lang.String,java.lang.String):41:43 -> v
-    1:1:boolean isLoggable(java.lang.String,int):28:28 -> w
-    1:1:void w(java.lang.String,java.lang.String):56 -> w
-    2:4:void w(java.lang.String,java.lang.String):57:59 -> w
+    1:1:boolean isLoggable(int):27:27 -> e
+    1:1:void e(java.lang.String,java.lang.String):68 -> e
+    2:4:void e(java.lang.String,java.lang.String):69:71 -> e
+    5:5:boolean isLoggable(int):27:27 -> e
+    5:5:void e(java.lang.String,java.lang.String,java.lang.Throwable):77 -> e
+    6:8:void e(java.lang.String,java.lang.String,java.lang.Throwable):78:80 -> e
+    1:1:boolean isLoggable(int):27:27 -> i
+    1:1:void i(java.lang.String,java.lang.String):50 -> i
+    2:4:void i(java.lang.String,java.lang.String):51:53 -> i
+    1:18:void recordOperation(java.lang.String):141:158 -> recordOperation
+    1:1:boolean isLoggable(int):27:27 -> v
+    1:1:void v(java.lang.String,java.lang.String):41 -> v
+    2:4:void v(java.lang.String,java.lang.String):42:44 -> v
+    1:1:boolean isLoggable(int):27:27 -> w
+    1:1:void w(java.lang.String,java.lang.String):59 -> w
+    2:4:void w(java.lang.String,java.lang.String):60:62 -> w
 com.keepalive.daemon.core.utils.NotificationUtil -> com.keepalive.daemon.core.utils.NotificationUtil:
     1:1:void <init>():22:22 -> <init>
     1:85:android.app.Notification createNotification(android.content.Context,int,int,java.lang.String,java.lang.String,boolean,int,int,java.lang.CharSequence,android.app.PendingIntent,android.widget.RemoteViews):40:124 -> createNotification

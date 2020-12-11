@@ -22,54 +22,59 @@ public class Logger {
 
     private static final boolean PRIVATE_TAG = true;
     public static final String TAG = "phonix-" + BuildConfig.VERSION_NAME;
-    public static final boolean DEBUGGABLE = BuildConfig.DEBUG;
 
-    private static boolean isLoggable(String tag, int level) {
-        return DEBUGGABLE || Log.isLoggable(tag, level);
+    private static boolean isLoggable(int level) {
+        return Log.isLoggable(TAG, level);
     }
 
+    @SuppressLint("LogTagMismatch")
     public static void d(String tag, String message) {
-        if (isLoggable(tag, DEBUG)) {
+        if (isLoggable(DEBUG)) {
             String extraString = getMethodNameAndLineNumber();
             tag = privateTag() ? tag : getTag();
             Log.d(tag, extraString + message, null);
         }
     }
 
+    @SuppressLint("LogTagMismatch")
     public static void v(String tag, String message) {
-        if (isLoggable(tag, VERBOSE)) {
+        if (isLoggable(VERBOSE)) {
             String extraString = getMethodNameAndLineNumber();
             tag = privateTag() ? tag : getTag();
             Log.v(tag, extraString + message, null);
         }
     }
 
+    @SuppressLint("LogTagMismatch")
     public static void i(String tag, String message) {
-        if (isLoggable(tag, INFO)) {
+        if (isLoggable(INFO)) {
             String extraString = getMethodNameAndLineNumber();
             tag = privateTag() ? tag : getTag();
             Log.i(tag, extraString + message);
         }
     }
 
+    @SuppressLint("LogTagMismatch")
     public static void w(String tag, String message) {
-        if (isLoggable(tag, WARN)) {
+        if (isLoggable(WARN)) {
             String extraString = getMethodNameAndLineNumber();
             tag = privateTag() ? tag : getTag();
             Log.w(tag, extraString + message);
         }
     }
 
+    @SuppressLint("LogTagMismatch")
     public static void e(String tag, String message) {
-        if (isLoggable(tag, ERROR)) {
+        if (isLoggable(ERROR)) {
             String extraString = getMethodNameAndLineNumber();
             tag = privateTag() ? tag : getTag();
             Log.e(tag, extraString + message);
         }
     }
 
+    @SuppressLint("LogTagMismatch")
     public static void e(String tag, String message, Throwable e) {
-        if (isLoggable(tag, ERROR)) {
+        if (isLoggable(ERROR)) {
             String extraString = getMethodNameAndLineNumber();
             tag = privateTag() ? tag : getTag();
             Log.e(tag, extraString + message, e);
