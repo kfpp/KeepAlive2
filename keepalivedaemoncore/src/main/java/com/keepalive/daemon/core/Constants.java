@@ -16,4 +16,6 @@ public interface Constants {
     String NOTI_TICKER_TEXT = "noti_ticker_text";
     String NOTI_PENDING_INTENT = "noti_pending_intent";
     String NOTI_REMOTE_VIEWS = "noti_remote_views";
+
+    String SVC_STOP_SELF = "svc_stop_self";
 }

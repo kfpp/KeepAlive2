@@ -52,9 +52,16 @@ public class NotifyResidentService extends DaemonBaseService {
 
         NotificationUtil.showNotification(this, noti);
 
-        stopSelf(startId);
+        if (intent.getBooleanExtra(Constants.SVC_STOP_SELF, true)) {
+            boolean result = stopSelfResult(startId);
+            Logger.i(TAG, "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ " +
+                    "stop service: " + startId + ", result: " + result);
+            if (result) {
+                return START_NOT_STICKY;
+            }
+        }
 
-        return START_NOT_STICKY;
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Nullable
@@ -124,6 +131,11 @@ public class NotifyResidentService extends DaemonBaseService {
 
         public Builder attach(Class<? extends NotifyResidentService> serviceClass) {
             intent.setClass(wrCtx.get(), serviceClass);
+            return this;
+        }
+
+        public Builder stopSelf(boolean stopSelf) {
+            intent.putExtra(Constants.SVC_STOP_SELF, stopSelf);
             return this;
         }
 

@@ -42,7 +42,9 @@ public class DaemonHolder {
                 new Intent(context, DaemonInstrumentation.class)
         );
 
-        ServiceHolder.fireService(context, NotifyResidentService.class, true);
+        if (inMainProcess(context)) {
+            ServiceHolder.fireService(context, NotifyResidentService.class, true);
+        }
     }
 
     public boolean inDaemonProcess() {
