@@ -1,4 +1,5 @@
 adb shell:
+setprop log.tag.phonix-[BuildConfig.VERSION_NAME]
 logcat | egrep " Zygote | AndroidRuntime: | DEBUG|phonix-|binder| ActivityManager:|ANR|logbridge"
 
 ps -A | egrep "init|zygote|phonix"

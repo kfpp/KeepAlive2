@@ -14,13 +14,13 @@ import static com.keepalive.daemon.core.utils.Logger.TAG;
 public class ServiceHolder {
 
     public static void fireService(Context context, Class<? extends Service> clazz, boolean isForeground) {
-        Logger.i(TAG, "service=" + clazz.getName() + ", isForeground=" + isForeground);
         Intent intent = new Intent(context, clazz);
         fireService(context, intent, isForeground);
     }
 
     public static void fireService(Context context, Intent intent, boolean isForeground) {
         try {
+            Logger.d(TAG, (isForeground ? "startForegroundService: " : "startService: ") + intent);
             if (isForeground) {
                 ContextCompat.startForegroundService(context, intent);
             } else {
@@ -28,6 +28,7 @@ public class ServiceHolder {
             }
         } catch (Throwable t) {
             Logger.e(TAG, "Failed to start service: ", t);
+            Logger.d(TAG, "bindService: " + intent);
             context.bindService(intent, new ServiceConnection() {
                 @Override
                 public void onServiceConnected(ComponentName componentName, IBinder iBinder) {

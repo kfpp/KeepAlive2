@@ -33,8 +33,8 @@ public class NotifyResidentService extends DaemonBaseService {
 
     @Override
     public final int onStartCommand(Intent intent, int flags, int startId) {
-        Logger.d(TAG, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " +
-                "intent: " + intent + ", startId: " + startId);
+        Logger.i(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Logger.v(TAG, "!! intent: " + intent + ", startId: " + startId);
 
         Notification noti = NotificationUtil.createNotification(
                 this,

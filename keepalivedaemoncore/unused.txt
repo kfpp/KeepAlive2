@@ -2,8 +2,6 @@ com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper:
     private static final java.lang.String TAG
 com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler:
     private static final java.lang.String TAG
-com.keepalive.daemon.core.utils.Logger:
-    private static final boolean PRIVATE_TAG
 com.keepalive.daemon.core.scheduler.RunnableWrapper:
     private static final java.lang.String TAG
 com.keepalive.daemon.core.JavaDaemon:
@@ -17,9 +15,6 @@ com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler$1:
     public final synthetic com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler this$0
 com.keepalive.daemon.core.utils.Logger:
     public static boolean isLoggable(int)
-    public static boolean privateTag()
-    public static java.lang.String getTag()
-    public static java.lang.String getClassName()
 com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler$2:
     public final synthetic com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler this$0
 com.keepalive.daemon.core.utils.Utils:

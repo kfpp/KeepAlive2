@@ -1,6 +1,6 @@
 # compiler: R8
 # compiler_version: 1.6.82
-# pg_map_id: 209a14a
+# pg_map_id: 77db124
 # common_typos_disable
 com.keepalive.daemon.core.AppProcessRunnable -> com.keepalive.daemon.core.AppProcessRunnable:
     com.keepalive.daemon.core.DaemonEnv env -> a
@@ -121,7 +121,7 @@ com.keepalive.daemon.core.component.AssistService2 -> com.keepalive.daemon.core.
     1:2:void onCreate():20:21 -> onCreate
 com.keepalive.daemon.core.component.DaemonBaseService -> com.keepalive.daemon.core.component.DaemonBaseService:
     1:1:void <init>():10:10 -> <init>
-    1:11:void onCreate():14:24 -> onCreate
+    1:5:void onCreate():14:18 -> onCreate
 com.keepalive.daemon.core.component.DaemonInstrumentation -> com.keepalive.daemon.core.component.DaemonInstrumentation:
     1:1:void <init>():12:12 -> <init>
     1:2:void callApplicationOnCreate(android.app.Application):16:17 -> callApplicationOnCreate
@@ -131,7 +131,7 @@ com.keepalive.daemon.core.component.DaemonProcessService -> com.keepalive.daemon
     1:2:void onCreate():19:20 -> onCreate
 com.keepalive.daemon.core.component.DaemonReceiver -> com.keepalive.daemon.core.component.DaemonReceiver:
     1:1:void <init>():11:11 -> <init>
-    1:1:void onReceive(android.content.Context,android.content.Intent):14:14 -> onReceive
+    1:2:void onReceive(android.content.Context,android.content.Intent):14:15 -> onReceive
 com.keepalive.daemon.core.component.DaemonService -> com.keepalive.daemon.core.component.DaemonService:
     1:1:void <init>():13:13 -> <init>
     1:5:void onCreate():22:26 -> onCreate
@@ -203,41 +203,38 @@ com.keepalive.daemon.core.utils.HiddenApiWrapper -> com.keepalive.daemon.core.ut
     1:9:boolean setExemptions(java.lang.String[]):29:37 -> setExemptions
 com.keepalive.daemon.core.utils.Logger -> com.keepalive.daemon.core.utils.Logger:
     1:1:void <init>():21:21 -> <init>
-    1:5:java.lang.String getMethodNameAndLineNumber():90:94 -> a
-    6:18:java.lang.String getClassName():121:133 -> a
-    6:18:java.lang.String getMethodNameAndLineNumber():94 -> a
-    19:20:java.lang.String getMethodNameAndLineNumber():94:95 -> a
-    21:21:java.lang.String getMethodNameAndLineNumber():94:94 -> a
-    1:1:boolean isLoggable(int):27:27 -> d
-    1:1:void d(java.lang.String,java.lang.String):32 -> d
-    2:4:void d(java.lang.String,java.lang.String):33:35 -> d
-    1:1:boolean isLoggable(int):27:27 -> e
-    1:1:void e(java.lang.String,java.lang.String):68 -> e
-    2:4:void e(java.lang.String,java.lang.String):69:71 -> e
-    5:5:boolean isLoggable(int):27:27 -> e
-    5:5:void e(java.lang.String,java.lang.String,java.lang.Throwable):77 -> e
-    6:8:void e(java.lang.String,java.lang.String,java.lang.Throwable):78:80 -> e
-    1:1:boolean isLoggable(int):27:27 -> i
-    1:1:void i(java.lang.String,java.lang.String):50 -> i
-    2:4:void i(java.lang.String,java.lang.String):51:53 -> i
-    1:18:void recordOperation(java.lang.String):141:158 -> recordOperation
-    1:1:boolean isLoggable(int):27:27 -> v
-    1:1:void v(java.lang.String,java.lang.String):41 -> v
-    2:4:void v(java.lang.String,java.lang.String):42:44 -> v
-    1:1:boolean isLoggable(int):27:27 -> w
-    1:1:void w(java.lang.String,java.lang.String):59 -> w
-    2:4:void w(java.lang.String,java.lang.String):60:62 -> w
+    1:9:java.lang.String getMethodNameAndLineNumber():79:87 -> a
+    10:10:java.lang.String getMethodNameAndLineNumber():86:86 -> a
+    1:1:boolean isLoggable(int):26:26 -> d
+    1:1:void d(java.lang.String,java.lang.String):31 -> d
+    2:3:void d(java.lang.String,java.lang.String):32:33 -> d
+    1:1:boolean isLoggable(int):26:26 -> e
+    1:1:void e(java.lang.String,java.lang.String):63 -> e
+    2:3:void e(java.lang.String,java.lang.String):64:65 -> e
+    4:4:boolean isLoggable(int):26:26 -> e
+    4:4:void e(java.lang.String,java.lang.String,java.lang.Throwable):71 -> e
+    5:6:void e(java.lang.String,java.lang.String,java.lang.Throwable):72:73 -> e
+    1:1:boolean isLoggable(int):26:26 -> i
+    1:1:void i(java.lang.String,java.lang.String):47 -> i
+    2:3:void i(java.lang.String,java.lang.String):48:49 -> i
+    1:18:void recordOperation(java.lang.String):93:110 -> recordOperation
+    1:1:boolean isLoggable(int):26:26 -> v
+    1:1:void v(java.lang.String,java.lang.String):39 -> v
+    2:3:void v(java.lang.String,java.lang.String):40:41 -> v
+    1:1:boolean isLoggable(int):26:26 -> w
+    1:1:void w(java.lang.String,java.lang.String):55 -> w
+    2:3:void w(java.lang.String,java.lang.String):56:57 -> w
 com.keepalive.daemon.core.utils.NotificationUtil -> com.keepalive.daemon.core.utils.NotificationUtil:
     1:1:void <init>():22:22 -> <init>
     1:85:android.app.Notification createNotification(android.content.Context,int,int,java.lang.String,java.lang.String,boolean,int,int,java.lang.CharSequence,android.app.PendingIntent,android.widget.RemoteViews):40:124 -> createNotification
     1:5:void showNotification(android.app.Service,android.app.Notification):128:132 -> showNotification
 com.keepalive.daemon.core.utils.ServiceHolder -> com.keepalive.daemon.core.utils.ServiceHolder:
     1:1:void <init>():14:14 -> <init>
-    1:3:void fireService(android.content.Context,java.lang.Class,boolean):17:19 -> fireService
-    4:10:void fireService(android.content.Context,android.content.Intent,boolean):25:31 -> fireService
+    1:2:void fireService(android.content.Context,java.lang.Class,boolean):17:18 -> fireService
+    3:12:void fireService(android.content.Context,android.content.Intent,boolean):23:32 -> fireService
 com.keepalive.daemon.core.utils.ServiceHolder$1 -> com.keepalive.daemon.core.utils.ServiceHolder$1:
-    1:1:void <init>():31:31 -> <init>
-    1:1:void onServiceConnected(android.content.ComponentName,android.os.IBinder):34:34 -> onServiceConnected
+    1:1:void <init>():32:32 -> <init>
+    1:1:void onServiceConnected(android.content.ComponentName,android.os.IBinder):35:35 -> onServiceConnected
 com.keepalive.daemon.core.utils.Utils -> com.keepalive.daemon.core.utils.Utils:
     java.lang.String sProcessName -> a
     1:1:void <init>():12:12 -> <init>

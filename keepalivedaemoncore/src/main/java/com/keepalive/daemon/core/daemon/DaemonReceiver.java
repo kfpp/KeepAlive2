@@ -13,7 +13,7 @@ import static com.keepalive.daemon.core.utils.Logger.TAG;
 public class DaemonReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Logger.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Logger.i(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         Logger.v(TAG, "!! " + intent);
         ServiceHolder.fireService(context, NotifyResidentService.class, true);
     }

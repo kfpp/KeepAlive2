@@ -20,9 +20,9 @@ public class DaemonService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.d(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Logger.i(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         ServiceHolder.fireService(this, NotifyResidentService.class, true);
-        startService(new Intent().setClassName(getPackageName(), AssistService1.class.getName()));
-        startService(new Intent().setClassName(getPackageName(), AssistService2.class.getName()));
+        ServiceHolder.fireService(this, AssistService1.class, false);
+        ServiceHolder.fireService(this, AssistService2.class, false);
     }
 }
