@@ -1,12 +1,14 @@
 package com.sogou;
 
 import android.app.Application;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
-import android.widget.Toast;
+import android.content.Intent;
 
-import com.keepalive.daemon.core.BuildConfig;
 import com.keepalive.daemon.core.DaemonHolder;
 import com.keepalive.daemon.core.utils.Logger;
+import com.sogou.daemon.R;
 
 public class App extends Application {
     @Override
@@ -27,9 +29,18 @@ public class App extends Application {
             Logger.d(Logger.TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inMainProcess: "
                     + inMainProcess);
             if (inMainProcess) {
-                if (BuildConfig.DEBUG) {
-                    Toast.makeText(this, "我胡汉山又回来啦，啊哈哈哈哈~~~~", Toast.LENGTH_LONG).show();
-                }
+                Intent i = new Intent(this, MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                PendingIntent pi = PendingIntent.getActivity(this, 0, i,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+                new ResidentService.Builder(this)
+                        .smallIconId(R.drawable.notify_panel_notification_icon_bg)
+                        .title(getApplicationInfo().loadLabel(getPackageManager()))
+                        .text("Hello, world!")
+                        .importance(NotificationManager.IMPORTANCE_NONE)
+                        .pendingIntent(pi)
+                        .fire();
             }
         }
     }
