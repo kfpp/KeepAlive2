@@ -22,9 +22,10 @@ public class DaemonService extends Service {
     public void onCreate() {
         super.onCreate();
         Logger.i(TAG, "@_@");
-        ServiceHolder.fireService(this, NotifyResidentService.class, true);
+//        ServiceHolder.fireService(this, NotifyResidentService.class, true);
 //        ServiceHolder.fireService(this, AssistService1.class, false);
 //        ServiceHolder.fireService(this, AssistService2.class, false);
+        ServiceHolder.bindService(this, NotifyResidentService.class);
         ServiceHolder.bindService(this, AssistService1.class);
         ServiceHolder.bindService(this, AssistService2.class);
     }

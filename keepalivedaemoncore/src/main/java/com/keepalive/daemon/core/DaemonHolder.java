@@ -43,7 +43,8 @@ public class DaemonHolder {
         );
 
         if (inMainProcess(context)) {
-            ServiceHolder.fireService(context, NotifyResidentService.class, true);
+//            ServiceHolder.fireService(context, NotifyResidentService.class, true);
+            ServiceHolder.bindService(context, NotifyResidentService.class);
         }
     }
 

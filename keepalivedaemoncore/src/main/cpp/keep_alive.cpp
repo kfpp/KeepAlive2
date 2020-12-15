@@ -26,8 +26,9 @@ int32_t lock_file(const char *lock_file_path) {
     } else {
         LOGD("success to open file >> %s <<", lock_file_path);
     }
+    LOGD("retry to lock file >> %s <<", lock_file_path);
     int32_t lockRet = flock(lockFileDescriptor, LOCK_EX);
-//    LOGD("flock [%s:%d] : %d", lock_file_path, lockFileDescriptor, lockRet);
+    LOGD("end to flock file >> %s <<", lock_file_path);
     if (lockRet == -1) {
         LOGE("failed to lock file >> %s <<", lock_file_path);
         return 0;
@@ -51,16 +52,15 @@ bool wait_file_lock(const char *lock_file_path) {
         }
     }
 
-    LOGD("start to wait for locking file >> %s <<", lock_file_path);
+    LOGD("retry to wait for locking file >> %s <<", lock_file_path);
     while (flock(lockFileDescriptor, LOCK_EX | LOCK_NB) != -1) {
         usleep(0x3E8u);
     }
-    LOGD("end to locking file >> %s <<", lock_file_path);
+    LOGD("end to lock file >> %s <<", lock_file_path);
 
     LOGD("retry to lock file >> %s <<", lock_file_path);
-
     int32_t lockRet = flock(lockFileDescriptor, LOCK_EX);
-//    LOGD("flock [%s:%d] : %d", lock_file_path, lockFileDescriptor, lockRet);
+    LOGD("end to lock file >> %s <<", lock_file_path);
     bool ret = lockRet != -1;
     if (ret) {
         LOGD("success to lock file >> %s <<", lock_file_path);

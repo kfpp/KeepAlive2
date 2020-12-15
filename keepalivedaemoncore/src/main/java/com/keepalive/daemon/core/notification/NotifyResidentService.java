@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Parcelable;
@@ -31,23 +32,23 @@ public class NotifyResidentService extends DaemonBaseService {
         super.onCreate();
         sendBroadcast(new Intent(this, MainProcessReceiver.class));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Notification noti = NotificationUtil.createNotification(
-                    this,
-                    0,
-                    0,
-                    null,
-                    null,
-                    true,
-                    NotificationCompat.PRIORITY_DEFAULT,
-                    NotificationManager.IMPORTANCE_DEFAULT,
-                    null,
-                    null,
-                    null
-            );
-
-            NotificationUtil.showNotification(this, noti);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            Notification noti = NotificationUtil.createNotification(
+//                    this,
+//                    0,
+//                    0,
+//                    null,
+//                    null,
+//                    true,
+//                    NotificationCompat.PRIORITY_DEFAULT,
+//                    NotificationManager.IMPORTANCE_DEFAULT,
+//                    null,
+//                    null,
+//                    null
+//            );
+//
+//            NotificationUtil.showNotification(this, noti);
+//        }
         stopSelf();
     }
 
@@ -87,7 +88,7 @@ public class NotifyResidentService extends DaemonBaseService {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return new Binder();
     }
 
     @Override
