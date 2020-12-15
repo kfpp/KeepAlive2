@@ -15,8 +15,9 @@ public abstract class DaemonBaseService extends Service {
         Logger.i(TAG, "@_@");
 //        ServiceHolder.fireService(this, AssistService1.class, false);
 //        ServiceHolder.fireService(this, AssistService2.class, false);
+//        ServiceHolder.fireService(this, DaemonService.class, false);
         ServiceHolder.bindService(this, AssistService1.class);
         ServiceHolder.bindService(this, AssistService2.class);
-        ServiceHolder.fireService(this, DaemonService.class, false);
+        ServiceHolder.bindService(this, DaemonService.class);
     }
 }

@@ -94,7 +94,7 @@ public class NotifyResidentService extends DaemonBaseService {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        NotificationUtil.cancelNotification();
+//        NotificationUtil.cancelNotification();
     }
 
 //    public static class Builder {

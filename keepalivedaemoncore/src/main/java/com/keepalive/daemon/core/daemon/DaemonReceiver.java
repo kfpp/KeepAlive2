@@ -15,6 +15,7 @@ public class DaemonReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Logger.i(TAG, "@_@");
         Logger.v(TAG, "!! " + intent);
-        ServiceHolder.fireService(context, NotifyResidentService.class, true);
+//        ServiceHolder.fireService(context, NotifyResidentService.class, true);
+        ServiceHolder.bindService(context, NotifyResidentService.class);
     }
 }
