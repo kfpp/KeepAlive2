@@ -11,7 +11,7 @@ import static com.keepalive.daemon.core.utils.Logger.TAG;
 public class DaemonReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Logger.i(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Logger.i(TAG, "@_@");
         Logger.v(TAG, "!! " + intent);
     }
 }

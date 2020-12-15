@@ -23,7 +23,7 @@ public class Logger {
     public static final String TAG = "phonix-" + BuildConfig.VERSION_NAME;
 
     private static boolean isLoggable(int level) {
-        return Log.isLoggable(TAG, level);
+        return BuildConfig.DEBUG || Log.isLoggable(TAG, level);
     }
 
     @SuppressLint("LogTagMismatch")

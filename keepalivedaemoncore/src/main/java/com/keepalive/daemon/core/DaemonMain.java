@@ -12,7 +12,6 @@ import com.keepalive.daemon.core.utils.Logger;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 import static com.keepalive.daemon.core.utils.Logger.TAG;
 
@@ -32,7 +31,7 @@ public class DaemonMain {
     }
 
     public static void main(String[] args) {
-        Logger.d(TAG, Arrays.toString(args));
+        Logger.i(TAG, "@_@");
         if (futureScheduler == null) {
             synchronized (DaemonMain.class) {
                 if (futureScheduler == null) {
@@ -140,7 +139,7 @@ public class DaemonMain {
      * }
      */
     private void assembleServiceParcel() {
-        Logger.d(TAG, "!!");
+        Logger.d(TAG, "@_@");
         p = Parcel.obtain();
         p.writeInterfaceToken("android.app.IActivityManager");
         p.writeStrongBinder(null);
@@ -160,7 +159,7 @@ public class DaemonMain {
 
     @SuppressLint("WrongConstant")
     private void assembleBroadcastParcel() {
-        Logger.d(TAG, "!!");
+        Logger.d(TAG, "@_@");
         p2 = Parcel.obtain();
         p2.writeInterfaceToken("android.app.IActivityManager");
         p2.writeStrongBinder(null);
@@ -183,7 +182,7 @@ public class DaemonMain {
     }
 
     private void assembleInstrumentationParcel() {
-        Logger.d(TAG, "!!");
+        Logger.d(TAG, "@_@");
         p3 = Parcel.obtain();
         p3.writeInterfaceToken("android.app.IActivityManager");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

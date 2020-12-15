@@ -40,7 +40,7 @@ public class ShellExecutor {
             if (map != null) {
                 env.putAll(map);
             }
-            Logger.v(TAG, "the process builder's environment is " + env);
+//            Logger.v(TAG, "the process builder's environment is " + env);
             StringBuilder sb = new StringBuilder();
             for (String append : args) {
                 sb.append(append);

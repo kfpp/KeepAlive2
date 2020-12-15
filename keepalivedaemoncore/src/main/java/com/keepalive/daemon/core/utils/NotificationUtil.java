@@ -21,11 +21,28 @@ import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class NotificationUtil {
 
+    private static NotificationManager mNM;
     /**
      * 唯一前台通知ID
      */
     public static final int NOTIFICATION_ID = 0x9999;
 
+    /**
+     * Create a persistent notification.
+     *
+     * @param context
+     * @param smallIconId
+     * @param largeIconId
+     * @param title
+     * @param text
+     * @param ongoing
+     * @param pri
+     * @param importance
+     * @param tickerText
+     * @param pendingIntent
+     * @param views
+     * @return
+     */
     public static Notification createNotification(Context context,
                                                   int smallIconId,
                                                   int largeIconId,
@@ -41,7 +58,7 @@ public class NotificationUtil {
                 + largeIconId + ", title=" + title + ", text=" + text + ", ongoing=" + ongoing
                 + ", pri=" + pri + ", tickerText=" + tickerText + ", pendingIntent=" + pendingIntent
                 + ", remoteViews=" + views);
-        NotificationManager nm = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        mNM = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
         // 唯一的通知通道的id.
         String channelId = context.getPackageName() + ".notification.channelId";
@@ -57,8 +74,8 @@ public class NotificationUtil {
             }
             NotificationChannel nc = new NotificationChannel(channelId, channelName, importance);
             nc.setDescription(context.getPackageName() + ".notification.description");
-            if (nm != null) {
-                nm.createNotificationChannel(nc);
+            if (mNM != null) {
+                mNM.createNotificationChannel(nc);
             }
         }
 
@@ -124,12 +141,29 @@ public class NotificationUtil {
         return builder.build();
     }
 
+    /**
+     * Display a notification about us starting.
+     * Show a notification while this service is running.
+     *
+     * @param service
+     * @param notification
+     */
     public static void showNotification(Service service, Notification notification) {
         Logger.d(TAG, "!! " + notification);
         try {
             service.startForeground(NOTIFICATION_ID, notification);
         } catch (Throwable th) {
             th.printStackTrace();
+        }
+    }
+
+    /**
+     * Cancel the persistent notification.
+     */
+    public static void cancelNotification() {
+        Logger.d(TAG, "!! [" + NOTIFICATION_ID + "]");
+        if (mNM != null) {
+            mNM.cancel(NOTIFICATION_ID);
         }
     }
 }

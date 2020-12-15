@@ -17,6 +17,6 @@ public class DaemonProcessService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.i(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Logger.i(TAG, "@_@");
     }
 }

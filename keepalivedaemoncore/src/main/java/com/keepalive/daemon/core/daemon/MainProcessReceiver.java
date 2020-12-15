@@ -12,7 +12,7 @@ public class MainProcessReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Logger.i(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Logger.i(TAG, "@_@");
         Logger.v(TAG, "!! " + intent);
         boolean booleanExtra = intent.getBooleanExtra("main_proc_from_daemon", false);
         Logger.v(TAG, "booleanExtra: " + booleanExtra);

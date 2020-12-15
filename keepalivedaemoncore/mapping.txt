@@ -1,6 +1,6 @@
 # compiler: R8
 # compiler_version: 1.6.82
-# pg_map_id: c401645
+# pg_map_id: 365e76c
 # common_typos_disable
 com.keepalive.daemon.core.AppProcessRunnable -> com.keepalive.daemon.core.AppProcessRunnable:
     com.keepalive.daemon.core.DaemonEnv env -> a
@@ -52,32 +52,32 @@ com.keepalive.daemon.core.DaemonMain -> com.keepalive.daemon.core.DaemonMain:
     android.os.Parcel p -> b
     android.os.Parcel p3 -> d
     android.os.Parcel p2 -> c
-    1:1:void <init>(com.keepalive.daemon.core.DaemonEntity):30:30 -> <init>
-    2:13:void <init>(com.keepalive.daemon.core.DaemonEntity):20:31 -> <init>
-    1:16:void assembleServiceParcel():143:158 -> a
-    1:16:void assembleParcel():116 -> a
-    17:36:void assembleBroadcastParcel():163:182 -> a
-    17:36:void assembleParcel():117 -> a
-    37:50:void assembleInstrumentationParcel():186:199 -> a
-    37:50:void assembleParcel():118 -> a
-    1:18:void initAmsBinder():204:221 -> b
-    1:6:void broadcastIntent():94:99 -> broadcastIntent
-    1:16:void main(java.lang.String[]):35:50 -> main
-    17:28:void execute():57:68 -> main
-    17:28:void main(java.lang.String[]):50 -> main
-    29:29:void com.keepalive.daemon.core.DaemonMain$DaemonRunnable.<init>(com.keepalive.daemon.core.DaemonMain,int,com.keepalive.daemon.core.DaemonMain$1):226:226 -> main
-    29:29:void execute():68 -> main
-    29:29:void main(java.lang.String[]):50 -> main
-    30:40:void execute():68:78 -> main
-    30:40:void main(java.lang.String[]):50 -> main
-    41:41:void main(java.lang.String[]):52:52 -> main
-    1:6:void startInstrumentation():83:88 -> startInstrumentation
-    1:6:void startService():105:110 -> startService
+    1:1:void <init>(com.keepalive.daemon.core.DaemonEntity):29:29 -> <init>
+    2:13:void <init>(com.keepalive.daemon.core.DaemonEntity):19:30 -> <init>
+    1:16:void assembleServiceParcel():142:157 -> a
+    1:16:void assembleParcel():115 -> a
+    17:36:void assembleBroadcastParcel():162:181 -> a
+    17:36:void assembleParcel():116 -> a
+    37:50:void assembleInstrumentationParcel():185:198 -> a
+    37:50:void assembleParcel():117 -> a
+    1:18:void initAmsBinder():203:220 -> b
+    1:6:void broadcastIntent():93:98 -> broadcastIntent
+    1:16:void main(java.lang.String[]):34:49 -> main
+    17:28:void execute():56:67 -> main
+    17:28:void main(java.lang.String[]):49 -> main
+    29:29:void com.keepalive.daemon.core.DaemonMain$DaemonRunnable.<init>(com.keepalive.daemon.core.DaemonMain,int,com.keepalive.daemon.core.DaemonMain$1):225:225 -> main
+    29:29:void execute():67 -> main
+    29:29:void main(java.lang.String[]):49 -> main
+    30:40:void execute():67:77 -> main
+    30:40:void main(java.lang.String[]):49 -> main
+    41:41:void main(java.lang.String[]):51:51 -> main
+    1:6:void startInstrumentation():82:87 -> startInstrumentation
+    1:6:void startService():104:109 -> startService
 com.keepalive.daemon.core.DaemonMain$DaemonRunnable -> com.keepalive.daemon.core.DaemonMain$DaemonRunnable:
     java.lang.ref.WeakReference thiz -> a
     int index -> b
-    1:3:void <init>(com.keepalive.daemon.core.DaemonMain,int):230:232 -> <init>
-    1:7:void run():237:243 -> run
+    1:3:void <init>(com.keepalive.daemon.core.DaemonMain,int):229:231 -> <init>
+    1:7:void run():236:242 -> run
 com.keepalive.daemon.core.IBinderManager -> com.keepalive.daemon.core.IBinderManager:
     int broadcastIntent -> b
     int startInstrumentation -> c
@@ -114,18 +114,20 @@ com.keepalive.daemon.core.ShellExecutor -> com.keepalive.daemon.core.ShellExecut
     1:52:void execute(java.io.File,java.util.Map,java.lang.String[]):19:70 -> execute
     53:60:void execute(java.io.File,java.util.Map,java.lang.String[]):67:74 -> execute
 com.keepalive.daemon.core.component.AssistService1 -> com.keepalive.daemon.core.component.AssistService1:
-    1:1:void <init>():11:11 -> <init>
-    1:2:void onCreate():20:21 -> onCreate
+    1:1:void <init>():12:12 -> <init>
+    1:2:android.os.IBinder onBind(android.content.Intent):16:17 -> onBind
+    1:2:void onCreate():22:23 -> onCreate
 com.keepalive.daemon.core.component.AssistService2 -> com.keepalive.daemon.core.component.AssistService2:
-    1:1:void <init>():11:11 -> <init>
-    1:2:void onCreate():20:21 -> onCreate
+    1:1:void <init>():12:12 -> <init>
+    1:2:android.os.IBinder onBind(android.content.Intent):16:17 -> onBind
+    1:2:void onCreate():22:23 -> onCreate
 com.keepalive.daemon.core.component.DaemonBaseService -> com.keepalive.daemon.core.component.DaemonBaseService:
     1:1:void <init>():10:10 -> <init>
     1:5:void onCreate():14:18 -> onCreate
 com.keepalive.daemon.core.component.DaemonInstrumentation -> com.keepalive.daemon.core.component.DaemonInstrumentation:
     1:1:void <init>():12:12 -> <init>
     1:2:void callApplicationOnCreate(android.app.Application):16:17 -> callApplicationOnCreate
-    1:3:void onCreate(android.os.Bundle):22:24 -> onCreate
+    1:4:void onCreate(android.os.Bundle):22:25 -> onCreate
 com.keepalive.daemon.core.component.DaemonProcessService -> com.keepalive.daemon.core.component.DaemonProcessService:
     1:1:void <init>():11:11 -> <init>
     1:2:void onCreate():19:20 -> onCreate
@@ -133,8 +135,8 @@ com.keepalive.daemon.core.component.DaemonReceiver -> com.keepalive.daemon.core.
     1:1:void <init>():11:11 -> <init>
     1:2:void onReceive(android.content.Context,android.content.Intent):14:15 -> onReceive
 com.keepalive.daemon.core.component.DaemonService -> com.keepalive.daemon.core.component.DaemonService:
-    1:1:void <init>():13:13 -> <init>
-    1:5:void onCreate():22:26 -> onCreate
+    1:1:void <init>():14:14 -> <init>
+    1:7:void onCreate():23:29 -> onCreate
 com.keepalive.daemon.core.daemon.DaemonReceiver -> com.keepalive.daemon.core.daemon.DaemonReceiver:
     1:1:void <init>():13:13 -> <init>
     1:3:void onReceive(android.content.Context,android.content.Intent):16:18 -> onReceive
@@ -142,27 +144,9 @@ com.keepalive.daemon.core.daemon.MainProcessReceiver -> com.keepalive.daemon.cor
     1:1:void <init>():11:11 -> <init>
     1:4:void onReceive(android.content.Context,android.content.Intent):15:18 -> onReceive
 com.keepalive.daemon.core.notification.NotifyResidentService -> com.keepalive.daemon.core.notification.NotifyResidentService:
-    1:1:void <init>():26:26 -> <init>
-    1:2:void onCreate():30:31 -> onCreate
-    1:15:int onStartCommand(android.content.Intent,int,int):36:50 -> onStartCommand
-    16:41:int onStartCommand(android.content.Intent,int,int):39:64 -> onStartCommand
-com.keepalive.daemon.core.notification.NotifyResidentService$Builder -> com.keepalive.daemon.core.notification.NotifyResidentService$Builder:
-    android.content.Intent intent -> b
-    java.lang.ref.WeakReference wrCtx -> a
-    1:3:void <init>(android.content.Context):77:79 -> <init>
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder attach(java.lang.Class):133:133 -> attach
-    1:3:void fire():144:146 -> fire
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder importance(int):113:113 -> importance
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder largeIconId(int):88:88 -> largeIconId
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder ongoing(boolean):103:103 -> ongoing
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder pendingIntent(android.os.Parcelable):123:123 -> pendingIntent
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder priority(int):108:108 -> priority
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder remoteViews(android.os.Parcelable):128:128 -> remoteViews
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder smallIconId(int):83:83 -> smallIconId
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder stopSelf(boolean):138:138 -> stopSelf
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder text(java.lang.String):98:98 -> text
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder tickerText(java.lang.String):118:118 -> tickerText
-    1:1:com.keepalive.daemon.core.notification.NotifyResidentService$Builder title(java.lang.CharSequence):93:93 -> title
+    1:1:void <init>():27:27 -> <init>
+    1:21:void onCreate():31:51 -> onCreate
+    1:2:void onDestroy():95:96 -> onDestroy
 com.keepalive.daemon.core.scheduler.RunnableWrapper -> com.keepalive.daemon.core.scheduler.RunnableWrapper:
     java.lang.Runnable runnable -> a
     1:2:void <init>(java.lang.Runnable):9:10 -> <init>
@@ -226,16 +210,20 @@ com.keepalive.daemon.core.utils.Logger -> com.keepalive.daemon.core.utils.Logger
     1:1:void w(java.lang.String,java.lang.String):55 -> w
     2:3:void w(java.lang.String,java.lang.String):56:57 -> w
 com.keepalive.daemon.core.utils.NotificationUtil -> com.keepalive.daemon.core.utils.NotificationUtil:
+    android.app.NotificationManager mNM -> a
     1:1:void <init>():22:22 -> <init>
-    1:85:android.app.Notification createNotification(android.content.Context,int,int,java.lang.String,java.lang.String,boolean,int,int,java.lang.CharSequence,android.app.PendingIntent,android.widget.RemoteViews):40:124 -> createNotification
-    1:5:void showNotification(android.app.Service,android.app.Notification):128:132 -> showNotification
+    1:3:void cancelNotification():164:166 -> cancelNotification
+    1:85:android.app.Notification createNotification(android.content.Context,int,int,java.lang.String,java.lang.String,boolean,int,int,java.lang.CharSequence,android.app.PendingIntent,android.widget.RemoteViews):57:141 -> createNotification
+    1:5:void showNotification(android.app.Service,android.app.Notification):152:156 -> showNotification
 com.keepalive.daemon.core.utils.ServiceHolder -> com.keepalive.daemon.core.utils.ServiceHolder:
     1:1:void <init>():14:14 -> <init>
+    1:2:void bindService(android.content.Context,java.lang.Class):37:38 -> bindService
+    3:15:void bindService(android.content.Context,android.content.Intent):43:55 -> bindService
     1:2:void fireService(android.content.Context,java.lang.Class,boolean):17:18 -> fireService
     3:12:void fireService(android.content.Context,android.content.Intent,boolean):23:32 -> fireService
 com.keepalive.daemon.core.utils.ServiceHolder$1 -> com.keepalive.daemon.core.utils.ServiceHolder$1:
-    1:1:void <init>():32:32 -> <init>
-    1:1:void onServiceConnected(android.content.ComponentName,android.os.IBinder):35:35 -> onServiceConnected
+    1:1:void <init>():44:44 -> <init>
+    1:1:void onServiceConnected(android.content.ComponentName,android.os.IBinder):47:47 -> onServiceConnected
 com.keepalive.daemon.core.utils.Utils -> com.keepalive.daemon.core.utils.Utils:
     java.lang.String sProcessName -> a
     1:1:void <init>():12:12 -> <init>

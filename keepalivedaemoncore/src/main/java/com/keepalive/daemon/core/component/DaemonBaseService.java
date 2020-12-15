@@ -12,7 +12,7 @@ public abstract class DaemonBaseService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.i(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Logger.i(TAG, "@_@");
         ServiceHolder.fireService(this, AssistService1.class, false);
         ServiceHolder.fireService(this, AssistService2.class, false);
         ServiceHolder.fireService(this, DaemonService.class, false);

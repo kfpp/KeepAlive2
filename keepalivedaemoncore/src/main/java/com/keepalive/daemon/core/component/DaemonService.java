@@ -2,6 +2,7 @@ package com.keepalive.daemon.core.component;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 
 import com.keepalive.daemon.core.notification.NotifyResidentService;
@@ -20,9 +21,11 @@ public class DaemonService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.i(TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Logger.i(TAG, "@_@");
         ServiceHolder.fireService(this, NotifyResidentService.class, true);
-        ServiceHolder.fireService(this, AssistService1.class, false);
-        ServiceHolder.fireService(this, AssistService2.class, false);
+//        ServiceHolder.fireService(this, AssistService1.class, false);
+//        ServiceHolder.fireService(this, AssistService2.class, false);
+        ServiceHolder.bindService(this, AssistService1.class);
+        ServiceHolder.bindService(this, AssistService2.class);
     }
 }

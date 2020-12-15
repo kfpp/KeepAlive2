@@ -20,7 +20,8 @@ public class ServiceHolder {
 
     public static void fireService(Context context, Intent intent, boolean isForeground) {
         try {
-            Logger.d(TAG, (isForeground ? "startForegroundService: " : "startService: ") + intent);
+            Logger.d(TAG, "!! " + (isForeground ? "startForegroundService: " : "startService: ")
+                    + intent);
             if (isForeground) {
                 ContextCompat.startForegroundService(context, intent);
             } else {
@@ -28,17 +29,30 @@ public class ServiceHolder {
             }
         } catch (Throwable t) {
             Logger.e(TAG, "Failed to start service: ", t);
-            Logger.d(TAG, "bindService: " + intent);
+            bindService(context, intent);
+        }
+    }
+
+    public static void bindService(Context context, Class<? extends Service> clazz) {
+        Intent intent = new Intent(context, clazz);
+        bindService(context, intent);
+    }
+
+    public static void bindService(Context context, Intent intent) {
+        try {
+            Logger.i(TAG, "!! " + intent);
             context.bindService(intent, new ServiceConnection() {
                 @Override
                 public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                    Logger.d(TAG, "ComponentName: " + componentName + ", IBinder: " + iBinder);
+                    Logger.d(TAG, "<<-->> : " + componentName + ", IBinder: " + iBinder);
                 }
 
                 @Override
                 public void onServiceDisconnected(ComponentName componentName) {
                 }
-            }, 0);
+            }, /*0*/Context.BIND_AUTO_CREATE | Context.BIND_ABOVE_CLIENT);
+        } catch (Throwable t) {
+            Logger.e(TAG, "Failed to start service: ", t);
         }
     }
 }
