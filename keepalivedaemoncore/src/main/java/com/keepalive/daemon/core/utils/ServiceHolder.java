@@ -50,7 +50,7 @@ public class ServiceHolder {
                 @Override
                 public void onServiceDisconnected(ComponentName componentName) {
                 }
-            }, /*0*/Context.BIND_AUTO_CREATE | Context.BIND_ABOVE_CLIENT);
+            }, /*0*/Context.BIND_AUTO_CREATE | Context.BIND_NOT_FOREGROUND);
         } catch (Throwable t) {
             Logger.e(TAG, "Failed to start service: ", t);
         }

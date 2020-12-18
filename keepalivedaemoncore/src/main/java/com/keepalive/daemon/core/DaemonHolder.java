@@ -35,12 +35,14 @@ public class DaemonHolder {
     }
 
     public void attach(Context context) {
-        JavaDaemon.getInstance().fire(
-                context,
-                new Intent(context, DaemonService.class),
-                new Intent(context, DaemonReceiver.class),
-                new Intent(context, DaemonInstrumentation.class)
-        );
+        if (inMainProcess(context) || inDaemonProcess()) {
+            JavaDaemon.getInstance().fire(
+                    context,
+                    new Intent(context, DaemonService.class),
+                    new Intent(context, DaemonReceiver.class),
+                    new Intent(context, DaemonInstrumentation.class)
+            );
+        }
 
         if (inMainProcess(context)) {
 //            ServiceHolder.fireService(context, NotifyResidentService.class, true);

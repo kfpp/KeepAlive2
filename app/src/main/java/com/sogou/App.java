@@ -10,6 +10,8 @@ import com.keepalive.daemon.core.DaemonHolder;
 import com.keepalive.daemon.core.utils.Logger;
 import com.sogou.daemon.R;
 
+import static com.keepalive.daemon.core.utils.Logger.TAG;
+
 public class App extends Application {
     @Override
     protected void attachBaseContext(Context base) {
@@ -22,11 +24,11 @@ public class App extends Application {
         super.onCreate();
 
         boolean inDaemonProcess = DaemonHolder.getInstance().inDaemonProcess();
-        Logger.d(Logger.TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inDaemonProcess: "
+        Logger.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inDaemonProcess: "
                 + inDaemonProcess);
         if (!inDaemonProcess) {
             boolean inMainProcess = DaemonHolder.getInstance().inMainProcess(this);
-            Logger.d(Logger.TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inMainProcess: "
+            Logger.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! inMainProcess: "
                     + inMainProcess);
             if (inMainProcess) {
                 Intent i = new Intent(this, MainActivity.class);
