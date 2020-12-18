@@ -9,9 +9,9 @@ public class DaemonEntity implements Parcelable {
     public String[] args;
     public String niceName;
 
-    public Intent intent;
-    public Intent intent2;
-    public Intent intent3;
+    public Intent serviceIntent;
+    public Intent broadcastIntent;
+    public Intent instrumentationIntent;
 
     public static final Creator<DaemonEntity> CREATOR = new Creator<DaemonEntity>() {
         @Override
@@ -37,13 +37,13 @@ public class DaemonEntity implements Parcelable {
         args = parcel.createStringArray();
         niceName = parcel.readString();
         if (parcel.readInt() != 0) {
-            intent = Intent.CREATOR.createFromParcel(parcel);
+            serviceIntent = Intent.CREATOR.createFromParcel(parcel);
         }
         if (parcel.readInt() != 0) {
-            intent2 = Intent.CREATOR.createFromParcel(parcel);
+            broadcastIntent = Intent.CREATOR.createFromParcel(parcel);
         }
         if (parcel.readInt() != 0) {
-            intent3 = Intent.CREATOR.createFromParcel(parcel);
+            instrumentationIntent = Intent.CREATOR.createFromParcel(parcel);
         }
     }
 
@@ -51,23 +51,23 @@ public class DaemonEntity implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeStringArray(args);
         parcel.writeString(niceName);
-        if (intent == null) {
+        if (serviceIntent == null) {
             parcel.writeInt(0);
         } else {
             parcel.writeInt(1);
-            intent.writeToParcel(parcel, i);
+            serviceIntent.writeToParcel(parcel, i);
         }
-        if (intent2 == null) {
+        if (broadcastIntent == null) {
             parcel.writeInt(0);
         } else {
             parcel.writeInt(1);
-            intent2.writeToParcel(parcel, i);
+            broadcastIntent.writeToParcel(parcel, i);
         }
-        if (intent3 == null) {
+        if (instrumentationIntent == null) {
             parcel.writeInt(0);
         } else {
             parcel.writeInt(1);
-            intent3.writeToParcel(parcel, i);
+            instrumentationIntent.writeToParcel(parcel, i);
         }
     }
 

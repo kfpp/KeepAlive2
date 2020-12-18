@@ -9,6 +9,7 @@ import com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler;
 import com.keepalive.daemon.core.utils.Logger;
 import com.keepalive.daemon.core.utils.Utils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,12 +20,13 @@ import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 public class JavaDaemon {
     private volatile static FutureScheduler scheduler;
+    private static final String lockFileSuffix = "d";
 
     private JavaDaemon() {
         if (scheduler == null) {
             synchronized (JavaDaemon.class) {
                 if (scheduler == null) {
-                    scheduler = new SingleThreadFutureScheduler("javadaemon-holder", true);
+                    scheduler = new SingleThreadFutureScheduler("javadaemon-holder", false);
                 }
             }
         }
@@ -38,14 +40,15 @@ public class JavaDaemon {
         return Holder.INSTANCE;
     }
 
-    public void fire(Context context, Intent intent, Intent intent2, Intent intent3) {
+    public void fire(Context context, Intent serviceIntent, Intent broadcastIntent,
+                     Intent instrumentationIntent) {
         DaemonEnv env = new DaemonEnv();
         ApplicationInfo applicationInfo = context.getApplicationInfo();
         env.publicSourceDir = applicationInfo.publicSourceDir;
         env.nativeLibraryDir = applicationInfo.nativeLibraryDir;
-        env.intent = intent;
-        env.intent2 = intent2;
-        env.intent3 = intent3;
+        env.serviceIntent = serviceIntent;
+        env.broadcastIntent = broadcastIntent;
+        env.instrumentationIntent = instrumentationIntent;
         env.processName = Utils.getProcessName();
 
         fire(context, env, PROCS);
@@ -67,12 +70,12 @@ public class JavaDaemon {
                 }
             }
             if (isHitted) {
-                Logger.v(TAG, "[JavaDaemon] file lock start: " + proc);
-                NativeKeepAlive.lockFile(context.getFilesDir() + "/" + proc + "_daemon");
-                Logger.v(TAG, "[JavaDaemon] file lock finish");
+                Logger.v(TAG, "[NativeKeepAlive.lockFile] begin: " + proc);
+                NativeKeepAlive.lockFile(context.getFilesDir() + File.separator + proc + lockFileSuffix);
+                Logger.v(TAG, "[NativeKeepAlive.lockFile] end: " + proc);
                 String[] strArr = new String[list.size()];
                 for (int i = 0; i < strArr.length; i++) {
-                    strArr[i] = context.getFilesDir() + "/" + list.get(i) + "_daemon";
+                    strArr[i] = context.getFilesDir() + File.separator + list.get(i) + lockFileSuffix;
                 }
                 scheduler.scheduleFuture(new AppProcessRunnable(env, strArr, "daemon"), 0);
             }

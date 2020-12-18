@@ -1,16 +1,26 @@
 package com.keepalive.daemon.core;
 
+import com.keepalive.daemon.core.utils.Logger;
+
 import java.lang.reflect.Field;
 
-public class IBinderManager {
-    private int startService = invoke("TRANSACTION_startService",
-            "START_SERVICE_TRANSACTION");
-    private int broadcastIntent = invoke("TRANSACTION_broadcastIntent",
-            "BROADCAST_INTENT_TRANSACTION");
-    private int startInstrumentation = invoke("TRANSACTION_startInstrumentation",
-            "START_INSTRUMENTATION_TRANSACTION");
+import static com.keepalive.daemon.core.utils.Logger.TAG;
 
-    public int invoke(String str, String str2) {
+public class IBinderManager {
+    private static int startService;
+    private static int broadcastIntent;
+    private static int startInstrumentation;
+
+    static {
+        startService = invoke("TRANSACTION_startService",
+                "START_SERVICE_TRANSACTION");
+        broadcastIntent = invoke("TRANSACTION_broadcastIntent",
+                "BROADCAST_INTENT_TRANSACTION");
+        startInstrumentation = invoke("TRANSACTION_startInstrumentation",
+                "START_INSTRUMENTATION_TRANSACTION");
+    }
+
+    private static int invoke(String str, String str2) {
         int result = -1;
         try {
             Class<?> cls = Class.forName("android.app.IActivityManager$Stub");
@@ -18,32 +28,33 @@ public class IBinderManager {
             declaredField.setAccessible(true);
             result = declaredField.getInt(cls);
             declaredField.setAccessible(false);
-        } catch (Exception e) {
+        } catch (Throwable th) {
             try {
                 Class<?> cls2 = Class.forName("android.app.IActivityManager");
                 Field declaredField2 = cls2.getDeclaredField(str2);
                 declaredField2.setAccessible(true);
                 result = declaredField2.getInt(cls2);
                 declaredField2.setAccessible(false);
-            } catch (Exception e1) {
+            } catch (Throwable th1) {
             }
         }
+        Logger.d(TAG, "!! get transaction[" + str + "] : " + result);
         return result;
     }
 
-    public int startService() {
+    public static int startService() {
         return startService;
     }
 
-    public int broadcastIntent() {
+    public static int broadcastIntent() {
         return broadcastIntent;
     }
 
-    public int startInstrumentation() {
+    public static int startInstrumentation() {
         return startInstrumentation;
     }
 
-    public void thrown(Throwable th) {
+    public static void thrown(Throwable th) {
         th.printStackTrace();
     }
 }

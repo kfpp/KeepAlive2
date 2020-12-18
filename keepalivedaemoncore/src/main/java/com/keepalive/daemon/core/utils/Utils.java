@@ -67,7 +67,7 @@ public class Utils {
             // 一次读入一行，直到读入null为文件结束
             while ((tempString = reader.readLine()) != null) {
                 if (tempString.endsWith(".so")) {
-                    int index = tempString.indexOf("/");
+                    int index = tempString.indexOf(File.separator);
                     if (index != -1) {
                         String str = tempString.substring(index);
                         if (!allSOLists.contains(str)) {

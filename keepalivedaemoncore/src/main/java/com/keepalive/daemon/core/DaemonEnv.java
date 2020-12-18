@@ -7,9 +7,9 @@ public class DaemonEnv {
     public String publicSourceDir;
 
     public String nativeLibraryDir;
-    public Intent intent;
-    public Intent intent2;
-    public Intent intent3;
+    public Intent serviceIntent;
+    public Intent broadcastIntent;
+    public Intent instrumentationIntent;
 
     @Override
     public String toString() {
@@ -17,9 +17,9 @@ public class DaemonEnv {
                 "processName='" + processName + '\'' +
                 ", publicSourceDir='" + publicSourceDir + '\'' +
                 ", nativeLibraryDir='" + nativeLibraryDir + '\'' +
-                ", intent=" + intent +
-                ", intent2=" + intent2 +
-                ", intent3=" + intent3 +
+                ", serviceIntent=" + serviceIntent +
+                ", broadcastIntent=" + broadcastIntent +
+                ", instrumentationIntent=" + instrumentationIntent +
                 '}';
     }
 }

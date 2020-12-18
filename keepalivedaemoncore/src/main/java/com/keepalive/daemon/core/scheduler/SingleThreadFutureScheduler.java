@@ -36,7 +36,7 @@ public class SingleThreadFutureScheduler implements FutureScheduler {
 
         if (!doKeepAlive) {
             scheduledThreadPoolExecutor.setKeepAliveTime(10L, TimeUnit.MILLISECONDS);
-            scheduledThreadPoolExecutor.allowCoreThreadTimeOut(true);
+            scheduledThreadPoolExecutor.allowCoreThreadTimeOut(false);
         }
     }
 

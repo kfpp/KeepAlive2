@@ -1,5 +1,7 @@
 package com.keepalive.daemon.core;
 
+import android.text.TextUtils;
+
 import com.keepalive.daemon.core.utils.Logger;
 
 import java.io.BufferedReader;
@@ -7,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.Map;
 
 import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
@@ -41,11 +44,13 @@ public class ShellExecutor {
                 env.putAll(map);
             }
 //            Logger.v(TAG, "the process builder's environment is " + env);
-            StringBuilder sb = new StringBuilder();
-            for (String append : args) {
-                sb.append(append);
-                sb.append("\n");
-            }
+//            StringBuilder sb = new StringBuilder();
+//            for (String append : args) {
+//                sb.append(append);
+//                sb.append("\n");
+//            }
+
+            Logger.v(TAG, "$ " + Arrays.toString(args));
 
             Process proc = builder.start();
             OutputStream os = proc.getOutputStream();
@@ -82,7 +87,9 @@ public class ShellExecutor {
             sb.append(readLine);
             sb.append("\n");
         }
-        Logger.v(TAG, "read: " + sb);
+        if (!TextUtils.isEmpty(sb.toString())) {
+            Logger.v(TAG, "!! " + sb);
+        }
         return sb.toString();
     }
 }

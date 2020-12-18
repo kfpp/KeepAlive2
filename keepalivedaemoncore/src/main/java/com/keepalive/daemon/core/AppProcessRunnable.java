@@ -1,12 +1,8 @@
 package com.keepalive.daemon.core;
 
-import com.keepalive.daemon.core.utils.Logger;
-
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.keepalive.daemon.core.utils.Logger.TAG;
 
 /**
  * app_process [vm-options] cmd-dir [options] start-class-name [main-options]
@@ -37,9 +33,9 @@ public class AppProcessRunnable implements Runnable {
         DaemonEntity entity = new DaemonEntity();
         entity.niceName = niceName;
         entity.args = args;
-        entity.intent = env.intent;
-        entity.intent2 = env.intent2;
-        entity.intent3 = env.intent3;
+        entity.serviceIntent = env.serviceIntent;
+        entity.broadcastIntent = env.broadcastIntent;
+        entity.instrumentationIntent = env.instrumentationIntent;
 
         List<String> list = new LinkedList<>();
         list.add("export CLASSPATH=$CLASSPATH:" + env.publicSourceDir);
@@ -58,8 +54,7 @@ public class AppProcessRunnable implements Runnable {
                             "app_process32" : "app_process", DaemonMain.class.getCanonicalName(),
                             entity.toString(), niceName}));
         }
-        Logger.d(TAG, "shell commands: " + list);
-        File file = new File("/");
+        File file = new File(File.separator);
         String[] strArr = new String[list.size()];
         for (int i = 0; i < strArr.length; i++) {
             strArr[i] = list.get(i);
