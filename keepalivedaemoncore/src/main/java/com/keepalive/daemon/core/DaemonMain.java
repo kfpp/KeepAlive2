@@ -116,23 +116,21 @@ public class DaemonMain {
 
     /**
      * public ComponentName startService(IApplicationThread caller, Intent service,
-     * String resolvedType, String callingPackage, int userId) throws RemoteException
-     * {
-     * Parcel data = Parcel.obtain();
-     * Parcel reply = Parcel.obtain();
-     * data.writeInterfaceToken(IActivityManager.descriptor);
-     * data.writeStrongBinder(caller != null ? caller.asBinder() : null);
-     * service.writeToParcel(data, 0);
-     * data.writeString(resolvedType);
-     * data.writeString(callingPackage);
-     * data.writeInt(userId);
-     * //通过Binder 传递数据　【见流程5】
-     * mRemote.transact(START_SERVICE_TRANSACTION, data, reply, 0);
-     * reply.readException();
-     * ComponentName res = ComponentName.readFromParcel(reply);
-     * data.recycle();
-     * reply.recycle();
-     * return res;
+     *              String resolvedType, String callingPackage, int userId) throws RemoteException {
+     *      Parcel data = Parcel.obtain();
+     *      Parcel reply = Parcel.obtain();
+     *      data.writeInterfaceToken(IActivityManager.descriptor);
+     *      data.writeStrongBinder(caller != null ? caller.asBinder() : null);
+     *      service.writeToParcel(data, 0);
+     *      data.writeString(resolvedType);
+     *      data.writeString(callingPackage);
+     *      data.writeInt(userId);
+     *      mRemote.transact(START_SERVICE_TRANSACTION, data, reply, 0);
+     *      reply.readException();
+     *      ComponentName res = ComponentName.readFromParcel(reply);
+     *      data.recycle();
+     *      reply.recycle();
+     *      return res;
      * }
      */
     private void assembleServiceParcel() {
