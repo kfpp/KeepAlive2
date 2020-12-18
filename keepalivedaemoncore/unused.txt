@@ -1,3 +1,5 @@
+com.keepalive.daemon.core.JavaDaemon:
+    private static final java.lang.String lockFileSuffix
 com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper:
     private static final java.lang.String TAG
 com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler:

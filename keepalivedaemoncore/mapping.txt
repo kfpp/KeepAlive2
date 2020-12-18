@@ -1,15 +1,15 @@
 # compiler: R8
 # compiler_version: 1.6.82
-# pg_map_id: 42464f5
+# pg_map_id: 1e96087
 # common_typos_disable
 com.keepalive.daemon.core.AppProcessRunnable -> com.keepalive.daemon.core.AppProcessRunnable:
     com.keepalive.daemon.core.DaemonEnv env -> a
     java.lang.String niceName -> c
     java.lang.String[] args -> b
-    1:4:void <init>(com.keepalive.daemon.core.DaemonEnv,java.lang.String[],java.lang.String):29:32 -> <init>
-    1:16:void run():37:52 -> run
-    17:27:void run():49:59 -> run
-    28:39:void run():56:67 -> run
+    1:4:void <init>(com.keepalive.daemon.core.DaemonEnv,java.lang.String[],java.lang.String):25:28 -> <init>
+    1:16:void run():33:48 -> run
+    17:27:void run():45:55 -> run
+    28:38:void run():52:62 -> run
 com.keepalive.daemon.core.BuildConfig -> com.keepalive.daemon.core.BuildConfig:
     1:1:void <init>():6:6 -> <init>
 com.keepalive.daemon.core.Constants -> com.keepalive.daemon.core.Constants:
@@ -46,73 +46,73 @@ com.keepalive.daemon.core.DaemonHolder$Holder -> com.keepalive.daemon.core.Daemo
     3:3:void <clinit>():30:30 -> <clinit>
     1:1:void <init>():29:29 -> <init>
 com.keepalive.daemon.core.DaemonMain -> com.keepalive.daemon.core.DaemonMain:
-    com.keepalive.daemon.core.scheduler.FutureScheduler futureScheduler -> f
-    com.keepalive.daemon.core.IBinderManager binderManager -> a
-    android.os.IBinder binder -> e
-    android.os.Parcel p -> b
-    android.os.Parcel p3 -> d
-    android.os.Parcel p2 -> c
-    1:1:void <init>(com.keepalive.daemon.core.DaemonEntity):29:29 -> <init>
-    2:13:void <init>(com.keepalive.daemon.core.DaemonEntity):19:30 -> <init>
-    1:16:void assembleServiceParcel():142:157 -> a
-    1:16:void assembleParcel():115 -> a
-    17:36:void assembleBroadcastParcel():162:181 -> a
-    17:36:void assembleParcel():116 -> a
-    37:50:void assembleInstrumentationParcel():185:198 -> a
-    37:50:void assembleParcel():117 -> a
-    1:18:void initAmsBinder():203:220 -> b
-    1:6:void broadcastIntent():93:98 -> broadcastIntent
-    1:16:void main(java.lang.String[]):34:49 -> main
-    17:28:void execute():56:67 -> main
-    17:28:void main(java.lang.String[]):49 -> main
-    29:29:void com.keepalive.daemon.core.DaemonMain$DaemonRunnable.<init>(com.keepalive.daemon.core.DaemonMain,int,com.keepalive.daemon.core.DaemonMain$1):225:225 -> main
-    29:29:void execute():67 -> main
-    29:29:void main(java.lang.String[]):49 -> main
-    30:40:void execute():67:77 -> main
-    30:40:void main(java.lang.String[]):49 -> main
-    41:41:void main(java.lang.String[]):51:51 -> main
-    1:6:void startInstrumentation():82:87 -> startInstrumentation
-    1:6:void startService():104:109 -> startService
+    android.os.IBinder binder -> d
+    android.os.Parcel broadcastParcel -> b
+    android.os.Parcel serviceParcel -> a
+    android.os.Parcel instrumentationParcel -> c
+    com.keepalive.daemon.core.scheduler.FutureScheduler futureScheduler -> e
+    1:2:void <init>(com.keepalive.daemon.core.DaemonEntity):28:29 -> <init>
+    1:16:void assembleServiceParcel():139:154 -> a
+    1:16:void assembleParcel():112 -> a
+    17:36:void assembleBroadcastParcel():159:178 -> a
+    17:36:void assembleParcel():113 -> a
+    37:50:void assembleInstrumentationParcel():182:195 -> a
+    37:50:void assembleParcel():114 -> a
+    1:18:void initAmsBinder():200:217 -> b
+    1:5:void broadcastIntent():92:96 -> broadcastIntent
+    1:16:void main(java.lang.String[]):33:48 -> main
+    17:28:void execute():55:66 -> main
+    17:28:void main(java.lang.String[]):48 -> main
+    29:29:void com.keepalive.daemon.core.DaemonMain$DaemonRunnable.<init>(com.keepalive.daemon.core.DaemonMain,int,com.keepalive.daemon.core.DaemonMain$1):222:222 -> main
+    29:29:void execute():66 -> main
+    29:29:void main(java.lang.String[]):48 -> main
+    30:41:void execute():66:77 -> main
+    30:41:void main(java.lang.String[]):48 -> main
+    42:42:void main(java.lang.String[]):50:50 -> main
+    1:5:void startInstrumentation():82:86 -> startInstrumentation
+    1:5:void startService():102:106 -> startService
 com.keepalive.daemon.core.DaemonMain$DaemonRunnable -> com.keepalive.daemon.core.DaemonMain$DaemonRunnable:
     java.lang.ref.WeakReference thiz -> a
-    int index -> b
-    1:3:void <init>(com.keepalive.daemon.core.DaemonMain,int):229:231 -> <init>
-    1:7:void run():236:242 -> run
+    java.lang.String niceName -> c
+    java.lang.String lockFile -> b
+    1:4:void <init>(com.keepalive.daemon.core.DaemonMain,int):227:230 -> <init>
+    1:7:void run():235:241 -> run
 com.keepalive.daemon.core.IBinderManager -> com.keepalive.daemon.core.IBinderManager:
     int broadcastIntent -> b
     int startInstrumentation -> c
     int startService -> a
-    1:6:void <init>():5:10 -> <init>
-    1:1:int broadcastIntent():39:39 -> broadcastIntent
-    1:12:int invoke(java.lang.String,java.lang.String):16:27 -> invoke
-    1:1:int startInstrumentation():43:43 -> startInstrumentation
-    1:1:int startService():35:35 -> startService
-    1:1:void thrown(java.lang.Throwable):47:47 -> thrown
+    1:5:void <clinit>():15:19 -> <clinit>
+    1:1:void <init>():9:9 -> <init>
+    1:16:int invoke(java.lang.String,java.lang.String):26:41 -> a
+    1:1:int broadcastIntent():50:50 -> broadcastIntent
+    1:1:int startInstrumentation():54:54 -> startInstrumentation
+    1:1:int startService():46:46 -> startService
+    1:1:void thrown(java.lang.Throwable):58:58 -> thrown
 com.keepalive.daemon.core.JavaDaemon -> com.keepalive.daemon.core.JavaDaemon:
     com.keepalive.daemon.core.scheduler.FutureScheduler scheduler -> a
-    1:7:void <init>():23:29 -> <init>
-    1:10:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):42:51 -> fire
-    11:12:void fire(android.content.Context,com.keepalive.daemon.core.DaemonEnv,java.lang.String[]):55:56 -> fire
-    11:12:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):51 -> fire
-    13:35:void fire(android.content.Context,com.keepalive.daemon.core.DaemonEnv,java.lang.String[]):55:77 -> fire
-    13:35:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):51 -> fire
-    1:1:com.keepalive.daemon.core.JavaDaemon com.keepalive.daemon.core.JavaDaemon$Holder.access$100():33:33 -> getInstance
-    1:1:com.keepalive.daemon.core.JavaDaemon getInstance():38 -> getInstance
+    1:7:void <init>():25:31 -> <init>
+    1:10:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):45:54 -> fire
+    11:12:void fire(android.content.Context,com.keepalive.daemon.core.DaemonEnv,java.lang.String[]):58:59 -> fire
+    11:12:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):54 -> fire
+    13:35:void fire(android.content.Context,com.keepalive.daemon.core.DaemonEnv,java.lang.String[]):58:80 -> fire
+    13:35:void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent):54 -> fire
+    1:1:com.keepalive.daemon.core.JavaDaemon com.keepalive.daemon.core.JavaDaemon$Holder.access$100():35:35 -> getInstance
+    1:1:com.keepalive.daemon.core.JavaDaemon getInstance():40 -> getInstance
 com.keepalive.daemon.core.JavaDaemon$Holder -> com.keepalive.daemon.core.JavaDaemon$Holder:
     com.keepalive.daemon.core.JavaDaemon INSTANCE -> a
-    1:1:void <clinit>():34:34 -> <clinit>
-    2:2:void com.keepalive.daemon.core.JavaDaemon.<init>(com.keepalive.daemon.core.JavaDaemon$1):20:20 -> <clinit>
-    2:2:void <clinit>():34 -> <clinit>
-    3:3:void <clinit>():34:34 -> <clinit>
-    1:1:void <init>():33:33 -> <init>
+    1:1:void <clinit>():36:36 -> <clinit>
+    2:2:void com.keepalive.daemon.core.JavaDaemon.<init>(com.keepalive.daemon.core.JavaDaemon$1):21:21 -> <clinit>
+    2:2:void <clinit>():36 -> <clinit>
+    3:3:void <clinit>():36:36 -> <clinit>
+    1:1:void <init>():35:35 -> <init>
 com.keepalive.daemon.core.NativeKeepAlive -> com.keepalive.daemon.core.NativeKeepAlive:
     1:3:void <clinit>():13:15 -> <clinit>
     1:1:void <init>():3:3 -> <init>
 com.keepalive.daemon.core.ShellExecutor -> com.keepalive.daemon.core.ShellExecutor:
-    1:1:void <init>():15:15 -> <init>
-    1:8:java.lang.String read(java.io.BufferedReader):79:86 -> a
-    1:52:void execute(java.io.File,java.util.Map,java.lang.String[]):19:70 -> execute
-    53:60:void execute(java.io.File,java.util.Map,java.lang.String[]):67:74 -> execute
+    1:1:void <init>():18:18 -> <init>
+    1:10:java.lang.String read(java.io.BufferedReader):84:93 -> a
+    1:54:void execute(java.io.File,java.util.Map,java.lang.String[]):22:75 -> execute
+    55:62:void execute(java.io.File,java.util.Map,java.lang.String[]):72:79 -> execute
 com.keepalive.daemon.core.component.AssistService1 -> com.keepalive.daemon.core.component.AssistService1:
     1:1:void <init>():12:12 -> <init>
     1:2:android.os.IBinder onBind(android.content.Intent):16:17 -> onBind

@@ -46,5 +46,5 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
 
     implementation project(":keepalivedaemoncore")
-//    implementation(name: 'keepalivedaemoncore_v2.1.1r', ext: 'aar')
+//    implementation(name: 'keepalivedaemoncore_v2.2.0r', ext: 'aar')
 }
