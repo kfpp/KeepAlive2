@@ -87,11 +87,43 @@ bool wait_file_lock(const char *pfile) {
     }
 
     LOGD("check file locking status >> %s <<", pfile);
+    bool locked = true;
+    bool exceed_10 = false;
+    bool exceed_1000 = false;
+    bool exceed_10000 = false;
+    uint64_t retry = 0;
     while (flock(lockfd, LOCK_EX | LOCK_NB) != -1) {
-        LOGD("file is not locked >> %s <<", pfile);
+        ++retry;
+        if (retry > 10000) {
+            if (!exceed_10000) {
+                LOGW("?????? retry to wait for locking file >> %s << exceed %d times, so break it",
+                     pfile, retry - 1);
+            }
+            exceed_10000 = true;
+            locked = false;
+            break;
+        } else if (retry > 1000) {
+            if (!exceed_1000) {
+                LOGW("?????? retry to wait for locking file >> %s << exceed %d times, so relock it again",
+                     pfile, retry - 1);
+            }
+            exceed_1000 = true;
+            flock(lockfd, LOCK_EX);
+        } else if (retry > 10) {
+            if (!exceed_10) {
+                LOGW("?????? retry to wait for locking file >> %s << exceed %d times", pfile,
+                     retry - 1);
+            }
+            exceed_10 = true;
+        }
         usleep(0x3E8u);
     }
-    LOGD("file has been locked >> %s <<", pfile);
+
+    if (locked) {
+        LOGD("file has been locked >> %s <<", pfile);
+    } else {
+        LOGW("?????? file is not locked >> %s <<", pfile);
+    }
 
     LOGD("retry to lock file >> %s <<", pfile);
     int32_t iret = flock(lockfd, LOCK_EX);

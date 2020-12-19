@@ -24,7 +24,7 @@
 #else
 #define LOGI(...)
 #define LOGD(...)
-#endif
+#endif //~~~ LIB_DEBUG
 
 #define JAVA_CLASS "com/keepalive/daemon/core/NativeKeepAlive"
 
