@@ -86,6 +86,8 @@ bool wait_file_lock(const char *pfile) {
         return false;
     }
 
+    srand(time(NULL));
+
     LOGD("check file locking [-ex | -nb] status >> %s <<", pfile);
     bool locked = true;
     bool exceed_1000 = false;
@@ -101,7 +103,7 @@ bool wait_file_lock(const char *pfile) {
             }
             locked = false;
             break;
-        } else if (retry > 1000) {
+        } else if (retry > /*1000*/(500 + random(500))) {
             if (!exceed_1000) {
                 LOGW("?????? retry to wait for locking file >> %s << exceed %d times, so relock it again",
                      pfile, retry - 1);

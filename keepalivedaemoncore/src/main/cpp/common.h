@@ -4,6 +4,7 @@
 #include <android/log.h>
 #include <stdint.h>
 #include <sys/types.h>
+#include <time.h>
 
 #define TAG        "phonix-native"
 #define LOGW(...)    __android_log_print(ANDROID_LOG_WARN, TAG, __VA_ARGS__)
@@ -27,5 +28,7 @@
 #endif //~~~ LIB_DEBUG
 
 #define JAVA_CLASS "com/keepalive/daemon/core/NativeKeepAlive"
+
+#define random(x) (rand() % x)
 
 #endif //KEEPALIVE_COMMON_H
