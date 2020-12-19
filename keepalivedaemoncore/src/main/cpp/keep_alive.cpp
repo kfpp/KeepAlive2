@@ -86,27 +86,27 @@ bool wait_file_lock(const char *pfile) {
         return false;
     }
 
-    LOGD("check file locking [-ex|-nb] status >> %s <<", pfile);
+    LOGD("check file locking [-ex | -nb] status >> %s <<", pfile);
     bool locked = true;
     bool exceed_1000 = false;
     bool exceed_10000 = false;
     uint64_t retry = 0;
     while (flock(lockfd, LOCK_EX | LOCK_NB) != -1) {
         ++retry;
-        if (retry > 10000) { // > 10ms
+        if (retry > 10000) {
             if (!exceed_10000) {
                 LOGW("?????? retry to wait for locking file >> %s << exceed %d times, so break it",
                      pfile, retry - 1);
+                exceed_10000 = true;
             }
-            exceed_10000 = true;
             locked = false;
             break;
-        } else if (retry > 1000) { // > 1ms
+        } else if (retry > 1000) {
             if (!exceed_1000) {
                 LOGW("?????? retry to wait for locking file >> %s << exceed %d times, so relock it again",
                      pfile, retry - 1);
+                exceed_1000 = true;
             }
-            exceed_1000 = true;
             flock(lockfd, LOCK_EX);
         }
         usleep(0x3E8u);
