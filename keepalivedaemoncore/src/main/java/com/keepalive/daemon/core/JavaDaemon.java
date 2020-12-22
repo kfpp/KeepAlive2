@@ -18,7 +18,7 @@ import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
 import static com.keepalive.daemon.core.Constants.PROCS;
 import static com.keepalive.daemon.core.utils.Logger.TAG;
 
-public class JavaDaemon {
+class JavaDaemon {
     private volatile static FutureScheduler scheduler;
     private static final String lockFileSuffix = "d";
 
@@ -36,12 +36,32 @@ public class JavaDaemon {
         private volatile static JavaDaemon INSTANCE = new JavaDaemon();
     }
 
-    public static JavaDaemon getInstance() {
+    static JavaDaemon getInstance() {
         return Holder.INSTANCE;
     }
 
-    public void fire(Context context, Intent serviceIntent, Intent broadcastIntent,
-                     Intent instrumentationIntent) {
+    boolean inDaemonProcess() {
+        String processName = Utils.getProcessName();
+        for (String proc : PROCS) {
+            if (!processName.endsWith(COLON_SEPARATOR + proc)) {
+                continue;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean inMainProcess(Context context) {
+        String processName = Utils.getProcessName();
+        if (context.getPackageName().equals(processName)) {
+            return true;
+        }
+        return false;
+    }
+
+    void fire(Context context, Intent serviceIntent, Intent broadcastIntent,
+              Intent instrumentationIntent) {
         DaemonEnv env = new DaemonEnv();
         ApplicationInfo applicationInfo = context.getApplicationInfo();
         env.publicSourceDir = applicationInfo.publicSourceDir;
@@ -57,19 +77,19 @@ public class JavaDaemon {
     private void fire(Context context, DaemonEnv env, String[] args) {
         Logger.i(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! fire(): "
                 + "env=" + env + ", args=" + Arrays.toString(args));
-        boolean isHitted = false;
+        boolean inDaemonProc = false;
         String processName = env.processName;
         if (processName.startsWith(context.getPackageName()) && processName.contains(COLON_SEPARATOR)) {
             String proc = processName.substring(processName.lastIndexOf(COLON_SEPARATOR) + 1);
             List<String> list = new ArrayList();
             for (String arg : args) {
                 if (arg.equals(proc)) {
-                    isHitted = true;
+                    inDaemonProc = true;
                 } else {
                     list.add(arg);
                 }
             }
-            if (isHitted) {
+            if (inDaemonProc) {
                 Logger.v(TAG, "[NativeKeepAlive.lockFile] begin: " + proc);
                 NativeKeepAlive.lockFile(context.getFilesDir() + File.separator + proc + lockFileSuffix);
                 Logger.v(TAG, "[NativeKeepAlive.lockFile] end: " + proc);

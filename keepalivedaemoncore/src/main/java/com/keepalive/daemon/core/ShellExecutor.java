@@ -15,9 +15,9 @@ import java.util.Map;
 import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
 import static com.keepalive.daemon.core.utils.Logger.TAG;
 
-public class ShellExecutor {
+class ShellExecutor {
 
-    public static void execute(File dir, Map<String, String> map, String[] args) {
+    static void execute(File dir, Map<String, String> map, String[] args) {
         try {
             ProcessBuilder builder = new ProcessBuilder(new String[0]);
             String envPath = System.getenv("PATH");

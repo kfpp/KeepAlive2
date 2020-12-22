@@ -86,14 +86,15 @@ bool wait_file_lock(const char *pfile) {
         return false;
     }
 
-    srand(time(NULL));
+    srand((unsigned)time(NULL));
 
-    LOGD("check file locking [-ex | -nb] status >> %s <<", pfile);
+    LOGD("check file locking [-ex|-nb] status >> %s <<", pfile);
     bool locked = true;
     bool exceed_1000 = false;
     bool exceed_10000 = false;
     uint64_t retry = 0;
     while (flock(lockfd, LOCK_EX | LOCK_NB) != -1) {
+        int randNum = 1000 + random(100);
         ++retry;
         if (retry > 10000) {
             if (!exceed_10000) {
@@ -103,7 +104,7 @@ bool wait_file_lock(const char *pfile) {
             }
             locked = false;
             break;
-        } else if (retry > /*1000*/(500 + random(500))) {
+        } else if (retry > /*1000*/randNum) {
             if (!exceed_1000) {
                 LOGW("?????? retry to wait for locking file >> %s << exceed %d times, so relock it again",
                      pfile, retry - 1);

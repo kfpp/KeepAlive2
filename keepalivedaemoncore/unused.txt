@@ -7,7 +7,11 @@ com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler:
 com.keepalive.daemon.core.scheduler.RunnableWrapper:
     private static final java.lang.String TAG
 com.keepalive.daemon.core.JavaDaemon:
+    public static com.keepalive.daemon.core.JavaDaemon getInstance()
     public synthetic void <init>(com.keepalive.daemon.core.JavaDaemon$1)
+    public boolean inDaemonProcess()
+    public boolean inMainProcess(android.content.Context)
+    public void fire(android.content.Context,android.content.Intent,android.content.Intent,android.content.Intent)
     public final void fire(android.content.Context,com.keepalive.daemon.core.DaemonEnv,java.lang.String[])
 com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper$1:
     public final synthetic com.keepalive.daemon.core.scheduler.ThreadFactoryWrapper this$0
@@ -17,6 +21,8 @@ com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler$1:
     public final synthetic com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler this$0
 com.keepalive.daemon.core.utils.Logger:
     public static boolean isLoggable(int)
+com.keepalive.daemon.core.ShellExecutor:
+    public static void execute(java.io.File,java.util.Map,java.lang.String[])
 com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler$2:
     public final synthetic com.keepalive.daemon.core.scheduler.SingleThreadFutureScheduler this$0
 com.keepalive.daemon.core.utils.Utils:

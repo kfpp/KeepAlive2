@@ -10,10 +10,6 @@ import com.keepalive.daemon.core.daemon.DaemonReceiver;
 import com.keepalive.daemon.core.notification.NotifyResidentService;
 import com.keepalive.daemon.core.utils.HiddenApiWrapper;
 import com.keepalive.daemon.core.utils.ServiceHolder;
-import com.keepalive.daemon.core.utils.Utils;
-
-import static com.keepalive.daemon.core.Constants.COLON_SEPARATOR;
-import static com.keepalive.daemon.core.Constants.PROCS;
 
 public class DaemonHolder {
 
@@ -35,7 +31,7 @@ public class DaemonHolder {
     }
 
     public void attach(Context context) {
-        if (inMainProcess(context) || inDaemonProcess()) {
+        if (inDaemonProcess()) {
             JavaDaemon.getInstance().fire(
                     context,
                     new Intent(context, DaemonService.class),
@@ -51,22 +47,10 @@ public class DaemonHolder {
     }
 
     public boolean inDaemonProcess() {
-        String processName = Utils.getProcessName();
-        for (String proc : PROCS) {
-            if (!processName.endsWith(COLON_SEPARATOR + proc)) {
-                continue;
-            } else {
-                return true;
-            }
-        }
-        return false;
+        return JavaDaemon.getInstance().inDaemonProcess();
     }
 
     public boolean inMainProcess(Context context) {
-        String processName = Utils.getProcessName();
-        if (context.getPackageName().equals(processName)) {
-            return true;
-        }
-        return false;
+        return JavaDaemon.getInstance().inMainProcess(context);
     }
 }

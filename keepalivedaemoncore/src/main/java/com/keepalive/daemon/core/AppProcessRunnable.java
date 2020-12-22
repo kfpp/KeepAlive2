@@ -17,12 +17,12 @@ import java.util.List;
  * start-class-name –包含main方法的主类  (com.android.commands.am.Am)
  * main-options –启动时候传递到main方法中的参数
  */
-public class AppProcessRunnable implements Runnable {
+class AppProcessRunnable implements Runnable {
     private DaemonEnv env;
     private String[] args;
     private String niceName;
 
-    public AppProcessRunnable(DaemonEnv env, String[] args, String niceName) {
+    AppProcessRunnable(DaemonEnv env, String[] args, String niceName) {
         this.env = env;
         this.args = args;
         this.niceName = niceName;
