@@ -18,9 +18,9 @@ import static com.keepalive.daemon.core.utils.Logger.TAG;
 public class DaemonMain {
     public DaemonEntity entity;
 
-    private Parcel serviceParcel;
-    private Parcel broadcastParcel;
-    private Parcel instrumentationParcel;
+    private Parcel serviceData;
+    private Parcel broadcastData;
+    private Parcel instrumentationData;
     private IBinder binder;
 
     private static volatile FutureScheduler futureScheduler;
@@ -79,9 +79,9 @@ public class DaemonMain {
     }
 
     public void startInstrumentation() {
-        if (instrumentationParcel != null) {
+        if (instrumentationData != null) {
             try {
-                binder.transact(IBinderManager.startInstrumentation(), instrumentationParcel, null, 1);
+                binder.transact(IBinderManager.startInstrumentation(), instrumentationData, null, 1);
             } catch (Throwable th) {
                 IBinderManager.thrown(th);
             }
@@ -89,9 +89,9 @@ public class DaemonMain {
     }
 
     public void broadcastIntent() {
-        if (broadcastParcel != null) {
+        if (broadcastData != null) {
             try {
-                binder.transact(IBinderManager.broadcastIntent(), broadcastParcel, null, 1);
+                binder.transact(IBinderManager.broadcastIntent(), broadcastData, null, 1);
             } catch (Throwable th) {
                 IBinderManager.thrown(th);
             }
@@ -99,9 +99,9 @@ public class DaemonMain {
     }
 
     public void startService() {
-        if (serviceParcel != null) {
+        if (serviceData != null) {
             try {
-                binder.transact(IBinderManager.startService(), serviceParcel, null, 1);
+                binder.transact(IBinderManager.startService(), serviceData, null, 1);
             } catch (Throwable th) {
                 IBinderManager.thrown(th);
             }
@@ -135,62 +135,62 @@ public class DaemonMain {
      */
     private void assembleServiceParcel() {
         Logger.d(TAG, "@_@");
-        serviceParcel = Parcel.obtain();
-        serviceParcel.writeInterfaceToken("android.app.IActivityManager");
-        serviceParcel.writeStrongBinder(null);
+        serviceData = Parcel.obtain();
+        serviceData.writeInterfaceToken("android.app.IActivityManager");
+        serviceData.writeStrongBinder(null);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            serviceParcel.writeInt(1);
+            serviceData.writeInt(1);
         }
-        entity.serviceIntent.writeToParcel(serviceParcel, 0);
-        serviceParcel.writeString(null);
+        entity.serviceIntent.writeToParcel(serviceData, 0);
+        serviceData.writeString(null);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            serviceParcel.writeInt(0); // 0 : WTF!!!
+            serviceData.writeInt(0); // 0 : WTF!!!
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            serviceParcel.writeString(entity.serviceIntent.getComponent().getPackageName());
+            serviceData.writeString(entity.serviceIntent.getComponent().getPackageName());
         }
-        serviceParcel.writeInt(0);
+        serviceData.writeInt(0);
     }
 
     @SuppressLint("WrongConstant")
     private void assembleBroadcastParcel() {
         Logger.d(TAG, "@_@");
-        broadcastParcel = Parcel.obtain();
-        broadcastParcel.writeInterfaceToken("android.app.IActivityManager");
-        broadcastParcel.writeStrongBinder(null);
+        broadcastData = Parcel.obtain();
+        broadcastData.writeInterfaceToken("android.app.IActivityManager");
+        broadcastData.writeStrongBinder(null);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            broadcastParcel.writeInt(1);
+            broadcastData.writeInt(1);
         }
         entity.broadcastIntent.setFlags(32);
-        entity.broadcastIntent.writeToParcel(broadcastParcel, 0);
-        broadcastParcel.writeString(null);
-        broadcastParcel.writeStrongBinder(null);
-        broadcastParcel.writeInt(-1);
-        broadcastParcel.writeString(null);
-        broadcastParcel.writeInt(0);
-        broadcastParcel.writeStringArray(null);
-        broadcastParcel.writeInt(-1);
-        broadcastParcel.writeInt(0);
-        broadcastParcel.writeInt(0);
-        broadcastParcel.writeInt(0);
-        broadcastParcel.writeInt(0);
+        entity.broadcastIntent.writeToParcel(broadcastData, 0);
+        broadcastData.writeString(null);
+        broadcastData.writeStrongBinder(null);
+        broadcastData.writeInt(-1);
+        broadcastData.writeString(null);
+        broadcastData.writeInt(0);
+        broadcastData.writeStringArray(null);
+        broadcastData.writeInt(-1);
+        broadcastData.writeInt(0);
+        broadcastData.writeInt(0);
+        broadcastData.writeInt(0);
+        broadcastData.writeInt(0);
     }
 
     private void assembleInstrumentationParcel() {
         Logger.d(TAG, "@_@");
-        instrumentationParcel = Parcel.obtain();
-        instrumentationParcel.writeInterfaceToken("android.app.IActivityManager");
+        instrumentationData = Parcel.obtain();
+        instrumentationData.writeInterfaceToken("android.app.IActivityManager");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            instrumentationParcel.writeInt(1);
+            instrumentationData.writeInt(1);
         }
-        entity.instrumentationIntent.getComponent().writeToParcel(instrumentationParcel, 0);
-        instrumentationParcel.writeString(null);
-        instrumentationParcel.writeInt(0);
-        instrumentationParcel.writeInt(0);
-        instrumentationParcel.writeStrongBinder(null);
-        instrumentationParcel.writeStrongBinder(null);
-        instrumentationParcel.writeInt(0);
-        instrumentationParcel.writeString(null);
+        entity.instrumentationIntent.getComponent().writeToParcel(instrumentationData, 0);
+        instrumentationData.writeString(null);
+        instrumentationData.writeInt(0);
+        instrumentationData.writeInt(0);
+        instrumentationData.writeStrongBinder(null);
+        instrumentationData.writeStrongBinder(null);
+        instrumentationData.writeInt(0);
+        instrumentationData.writeString(null);
     }
 
     private void initAmsBinder() {
